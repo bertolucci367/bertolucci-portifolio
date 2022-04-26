@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import Router from 'next/router'
-import firebase from '../lib/firebase'
+import firebase from 'src/lib/firebase'
 import cookie from 'js-cookie'
 const AuthContext = createContext()
 
