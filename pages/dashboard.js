@@ -1,14 +1,14 @@
-import useAuth from 'src/hooks/useAuth'
+import useAuth from 'src/hooks/useAuth';
 
 const Dashboard = () => {
-  const { user, signout } = useAuth()
+  const { user, signout } = useAuth();
 
   return (
     <>
       <h1>Bem vindo {user?.name} </h1>
       <button onClick={() => signout()}>logout</button>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

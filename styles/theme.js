@@ -9,4 +9,5 @@ const theme = {
     bold: 800,
     xBold: 900,
   },
-}
+};
+

@@ -1,8 +1,8 @@
-import { Box, Flex } from '@chakra-ui/react'
-import Topbar from './Topbar'
+import { Box, Flex } from '@chakra-ui/react';
+import Topbar from './Topbar';
 
 const Layout = ({ children }) => {
-  const bgColor = '#f4f5f6'
+  const bgColor = '#f4f5f6';
 
   return (
     <>
@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         </Flex>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

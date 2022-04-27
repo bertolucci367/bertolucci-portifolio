@@ -1,9 +1,9 @@
-import { Box, Button, Text, Flex, Heading } from '@chakra-ui/react'
-import useAuth from 'src/hooks/useAuth'
-import Layout from 'src/components/Layout'
+import { Box, Button, Text, Flex, Heading } from '@chakra-ui/react';
+import useAuth from 'src/hooks/useAuth';
+import Layout from 'src/components/Layout';
 
 const Cover = () => {
-  const bgColor = '#fff'
+  const bgColor = '#fff';
 
   return (
     <Box bgColor={bgColor}>
@@ -45,12 +45,11 @@ const Cover = () => {
               Bora começar!
             </Button>
           </Box>
-          
         </Flex>
       </Flex>
     </Box>
-  )
-}
+  );
+};
 const Home = () => {
   //const { user, signinGitHub, signinGoogle } = useAuth()
   return (
@@ -60,7 +59,7 @@ const Home = () => {
       </Heading> */}
       <Cover />
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

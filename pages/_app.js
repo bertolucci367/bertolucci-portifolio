@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import { AuthProvider } from 'src/contexts/AuthContext'
-import { Global, css } from '@emotion/react'
-import { ChakraProvider, extendTheme, CSSReset } from '@chakra-ui/react'
-import theme from 'src/styles/theme'
+import Head from 'next/head';
+import { AuthProvider } from 'src/contexts/AuthContext';
+import { Global, css } from '@emotion/react';
+import { ChakraProvider, extendTheme, CSSReset } from '@chakra-ui/react';
+import theme from 'src/styles/theme';
 
-const myTheme = extendTheme(theme)
+const myTheme = extendTheme(theme);
 const GlobalStyle = ({ children }) => (
   <>
     <Head>
@@ -25,7 +25,7 @@ const GlobalStyle = ({ children }) => (
     />
     {children}
   </>
-)
+);
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={myTheme}>
@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </AuthProvider>
     </ChakraProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
