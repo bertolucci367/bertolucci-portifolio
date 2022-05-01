@@ -21,8 +21,7 @@
     },
     "plugins": [
         "react",
-        "prettier",
-        "next"
+        "prettier"
     ],
     "rules": {
         "prettier/prettier": "error",
