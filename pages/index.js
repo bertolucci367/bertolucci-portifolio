@@ -51,7 +51,10 @@ const Cover = ({ technologies }) => {
             Gabriel Rodrigues
             <Box>
               <Box>
-                Desenvolvedor <Text bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">Frontend</Text>{' '}
+                Desenvolvedor{' '}
+                <Text bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
+                  Frontend
+                </Text>{' '}
               </Box>
             </Box>
           </Heading>
