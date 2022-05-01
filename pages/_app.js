@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Head from 'next/head';
 import { AuthProvider } from 'src/contexts/AuthContext';
 import { Global, css } from '@emotion/react';
@@ -36,6 +37,5 @@ const MyApp = ({ Component, pageProps }) => {
     </ChakraProvider>
   );
 };
-
 
 export default MyApp;
