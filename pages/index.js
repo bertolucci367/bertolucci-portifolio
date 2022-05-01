@@ -1,9 +1,36 @@
-import { Box, Button, Text, Flex, Heading } from '@chakra-ui/react';
-import useAuth from 'src/hooks/useAuth';
+import {
+  Box,
+  Button,
+  Text,
+  Flex,
+  Heading,
+  Wrap,
+  WrapItem,
+  Center,
+  useColorModeValue,
+  Link,
+  SimpleGrid,
+} from '@chakra-ui/react';
+import Image from 'next/image';
 import Layout from 'src/components/Layout';
+import { getAllTechnologies } from 'src/lib/dato-cms';
+import { useState, useEffect } from 'react';
 
-const Cover = () => {
-  const bgColor = '#fff';
+const Cover = ({ technologies }) => {
+  const [currentTechnologies, setTechnologies] = useState(technologies);
+  const bgColor = useColorModeValue('#FFFFFF', '#1A202C');
+
+  const handleShowAllTechnologies = () => {
+    const tecs = currentTechnologies.map((t) => {
+      t.defaultVisible = true;
+      return t;
+    });
+    setTechnologies(tecs);
+  };
+
+  const hiddenTechnologies = currentTechnologies?.filter(
+    (t) => !t.defaultVisible,
+  ).length;
 
   return (
     <Box bgColor={bgColor}>
@@ -21,18 +48,21 @@ const Cover = () => {
             mb={4}
             fontWeight="bold"
           >
-            Aprenda programação
-            <Box>direto ao ponto </Box>
-            <Box bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
-              100% free.
+            Gabriel Rodrigues
+            <Box>
+              <Box>
+                Desenvolvedor <Text bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">Frontend</Text>{' '}
+              </Box>
             </Box>
           </Heading>
-          <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
-            <Box>
-              Mantenha seus conhecimentos atualizados com as mais novas{' '}
-            </Box>
-            <Box>tecnologias que estão disponíveis no mercado!</Box>
-          </Text>
+          <Box>
+            <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
+              <Box>
+                Mantenha seus conhecimentos atualizados com as mais novas{' '}
+              </Box>
+              <Box>tecnologias que estão disponíveis no mercado!</Box>
+            </Text>
+          </Box>
           <Box>
             <Button
               as="a"
@@ -45,21 +75,85 @@ const Cover = () => {
               Bora começar!
             </Button>
           </Box>
+          <Box>
+            <Wrap>
+              {currentTechnologies
+                .filter((f) => f.defaultVisible)
+                .map((tech, index) => (
+                  <WrapItem key={index}>
+                    <Center
+                      w="100px"
+                      h="100px"
+                      borderWidth="1px"
+                      borderRadius="lg"
+                      overflow="hidden"
+                      flexDirection="column"
+                    >
+                      <Image
+                        src={tech.logo.url}
+                        alt={tech.name}
+                        width={180}
+                        height={180}
+                        title={tech.name}
+                        objectFit="cover"
+                        objectPosition={'center'}
+                      />
+                      <Text
+                        fontSize="sm"
+                        textAlign="center"
+                        fontWeight="bold"
+                        mt={2}
+                      >
+                        {tech.name}
+                      </Text>
+                    </Center>
+                  </WrapItem>
+                ))}
+              {hiddenTechnologies > 0 && (
+                <WrapItem>
+                  <Center
+                    w="100px"
+                    h="100px"
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                    flexDirection="column"
+                  >
+                    <Link onClick={handleShowAllTechnologies}>
+                      <Text
+                        fontSize="sm"
+                        textAlign="center"
+                        fontWeight="bold"
+                        mt={2}
+                      >
+                        {`+${hiddenTechnologies} outras`}
+                      </Text>
+                    </Link>
+                  </Center>
+                </WrapItem>
+              )}
+            </Wrap>
+          </Box>
         </Flex>
       </Flex>
     </Box>
   );
 };
-const Home = () => {
-  //const { user, signinGitHub, signinGoogle } = useAuth()
+export default function Home({ technologies }) {
   return (
     <Layout>
-      {/*  <Heading as="h2" size="3xl" isTruncated>
-        Hello World
-      </Heading> */}
-      <Cover />
+      <Cover technologies={technologies} />
     </Layout>
   );
-};
+}
 
-export default Home;
+export const getStaticProps = async () => {
+  const technologies = await getAllTechnologies();
+
+  return {
+    props: {
+      technologies,
+    },
+    revalidate: 10,
+  };
+};

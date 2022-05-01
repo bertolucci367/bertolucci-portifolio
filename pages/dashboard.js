@@ -1,3 +1,4 @@
+import { Img, Button, Heading, Text } from '@chakra-ui/react';
 import useAuth from 'src/hooks/useAuth';
 
 const Dashboard = () => {
@@ -5,8 +6,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1>Bem vindo {user?.name} </h1>
-      <button onClick={() => signout()}>logout</button>
+      <Heading>Bem vindo {user?.name} </Heading>
+      <Text>{user?.email} </Text>
+      <Img src={user?.photoUrl} w="80px" h="80px" />
+
+      <Button onClick={() => signout()}>logout</Button>
     </>
   );
 };
