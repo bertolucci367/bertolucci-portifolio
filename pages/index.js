@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   Box,
   Button,
@@ -9,15 +10,15 @@ import {
   Center,
   useColorModeValue,
   Link,
-  SimpleGrid,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Layout from 'src/components/Layout';
 import { getAllTechnologies } from 'src/lib/dato-cms';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const Cover = ({ technologies }) => {
   const [currentTechnologies, setTechnologies] = useState(technologies);
+
   const bgColor = useColorModeValue('#FFFFFF', '#1A202C');
 
   const handleShowAllTechnologies = () => {
@@ -51,10 +52,10 @@ const Cover = ({ technologies }) => {
             Gabriel Rodrigues
             <Box>
               <Box>
-                Desenvolvedor{' '}
+                Desenvolvedor
                 <Text bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
                   Frontend
-                </Text>{' '}
+                </Text>
               </Box>
             </Box>
           </Heading>
