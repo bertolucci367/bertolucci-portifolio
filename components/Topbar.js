@@ -39,16 +39,11 @@ const Topbar = () => {
           </Box>
 
           <span
-            // eslint-disable-next-line no-use-before-define
-            onMouseEnter={
-              // eslint-disable-next-line no-use-before-define
-              (e) => {
-              // eslint-disable-next-line no-use-before-define
+            onMouseEnter={(e) => {
               e.target.style.textDecoration = 'underline';
-              // eslint-disable-next-line no-use-before-define
+
               e.target.style.cursor = 'pointer';
             }}
-            // eslint-disable-next-line no-use-before-define
             onMouseLeave={(e) => (e.target.style.textDecoration = 'none')}
           >
             Login
@@ -59,7 +54,6 @@ const Topbar = () => {
             w={6}
             h={6}
             onClick={toggleColorMode}
-            // eslint-disable-next-line no-use-before-define
             onMouseEnter={(e) => (e.target.style.cursor = 'pointer')}
           />
         ) : (
@@ -67,7 +61,6 @@ const Topbar = () => {
             w={6}
             h={6}
             onClick={toggleColorMode}
-            // eslint-disable-next-line no-use-before-define
             onMouseEnter={(e) => (e.target.style.cursor = 'pointer')}
           />
         )}
