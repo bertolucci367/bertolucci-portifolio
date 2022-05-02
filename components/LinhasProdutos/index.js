@@ -47,9 +47,9 @@ const LinhasProdutos = ({ lines }) => {
         p="50"
       >
         <Box w="50%" p="10px">
-          <Flex direction={'column'} p="10px">
+          <Flex direction="column" p="10px">
             <Heading fontSize="4xl">Persona</Heading>
-            <Text fontSize="2xl" fontWeight={600}>
+            <Text fontSize="2xl" fontWeight="600">
               Luminárias únicas feitas para você
             </Text>
           </Flex>
