@@ -1,10 +1,10 @@
-import { Img, Button, Heading, Text, Flex } from '@chakra-ui/react';
+import { Img, Button, Heading, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import Layout from 'src/components/Layout';
 import useAuth from 'src/hooks/useAuth';
 
 const Dashboard = () => {
-  const { user, signout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Layout>

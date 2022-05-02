@@ -1,6 +1,9 @@
 import SliderCardsCarrousel from 'src/components/SliderCardsCarrousel';
+
 import { useColorModeValue, Flex, Heading, Text, Box } from '@chakra-ui/react';
+
 import Image from 'next/image';
+
 const LinhasProdutos = ({ lines }) => {
   const bgColorPanel = useColorModeValue('#f4f4f4', '#000111');
   const bgColorPersona = useColorModeValue('#fff', '#1A202C');
@@ -41,7 +44,7 @@ const LinhasProdutos = ({ lines }) => {
         bgColor={bgColorPersona}
         alignItems="center"
         justifyContent="space-between"
-        p={50}
+        p="50"
       >
         <Box w="50%" p="10px">
           <Flex direction={'column'} p="10px">
