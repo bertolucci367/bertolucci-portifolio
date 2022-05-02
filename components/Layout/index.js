@@ -1,5 +1,5 @@
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
-import Topbar from './Topbar';
+import Topbar from '../Header';
 
 const Layout = ({ children }) => {
   const bgColor = useColorModeValue('#f4f5f6', '#1A202C');

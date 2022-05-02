@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['www.datocms-assets.com']
+    domains: ['www.datocms-assets.com','media.graphassets.com']
   }
 }
 

@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
-      console.log(currentUser);
       const formatedUser = await formatUser(currentUser);
       setUser(formatedUser);
       setSession(true);
@@ -60,7 +59,7 @@ export function AuthProvider({ children }) {
         .auth()
         .signInWithPopup(new firebase.auth.GoogleAuthProvider());
       handleUser(response.user);
-      Router.push('/dashboard');
+      Router.push('/');
     } finally {
       setLoading(false);
     }
