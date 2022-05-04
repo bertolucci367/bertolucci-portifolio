@@ -8,6 +8,7 @@ import {
   Heading,
   Text,
   Container,
+  Flex,
 } from '@chakra-ui/react';
 
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
@@ -28,26 +29,13 @@ const settings = {
 };
 
 export default function CaptionCarousel({ cards }) {
-  // As we have used custom buttons, we need a reference variable to
-  // change the state
   const [slider, setSlider] = useState(null);
 
-  // These are the breakpoints which changes the position of the
-  // buttons as the screen size changes
   const top = useBreakpointValue({ base: '90%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '40px' });
 
-  // This list contains all the data for carousels
-  // This can be static or loaded from a server
-
   return (
-    <Box
-      position={'relative'}
-      height={'600px'}
-      width={'full'}
-      overflow={'hidden'}
-    >
-      {/* CSS files for react-slick */}
+    <Box position="relative" height="600px" width="full" overflow="hidden">
       {/* <link
         rel="stylesheet"
         type="text/css"
@@ -86,31 +74,42 @@ export default function CaptionCarousel({ cards }) {
         <BiRightArrowAlt size="40px" />
       </IconButton> */}
 
-      {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
           <Box
             key={index}
-            height={'2xl'}
+            height="2xl"
             position="relative"
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
             backgroundImage={`url(${card.image})`}
           >
-            <Container size="container.lg" height="800px" position="relative">
-              <Stack
+            <Container
+              size="container.lg"
+              height="800px"
+              position="relative"
+              w="full"
+            >
+              <Flex
                 w="full"
                 position="absolute"
                 top="50%"
                 transform="translate(0, -50%)"
                 direction="row"
+                
+                alignItems="center"
+                justifyContent="space-between"
               >
-                <Heading fontSize={30}>{card.title}</Heading>
-                <Text fontSize={18} fontWeight="bold" color="GrayText">
-                  {card.text}
-                </Text>
-              </Stack>
+                <Box w="full">
+                  <Heading fontSize="6xl">{card.title}</Heading>
+                </Box>
+                <Flex w="full" alignItems="center" justifyContent="center">
+                  <Text w="full" fontSize="2xl" fontWeight="bold" color="GrayText">
+                    {card.text}
+                  </Text>
+                </Flex>
+              </Flex>
             </Container>
           </Box>
         ))}

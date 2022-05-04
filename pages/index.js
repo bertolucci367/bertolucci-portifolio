@@ -1,11 +1,11 @@
 /* eslint-disable */
 //Native Imports
-import Image from 'next/image';
 import { useState } from 'react';
 //Chackra UI
 import {
   Box,
   Button,
+  Image,
   Text,
   Flex,
   Heading,
@@ -18,17 +18,25 @@ import {
 
 //Components
 import Layout from 'src/components/Layout';
+
 import Carousel from 'src/components/SliderCarousel';
+
 import LinhasProdutos from 'src/components/LinhasProdutos';
+
 //Libs
-import { getAllLines, getAllTypologies } from 'src/lib/graphcms';
+import {
+  getAllDesigners,
+  getAllLines,
+  getAllTypologies,
+} from 'src/lib/graphcms';
+import Panel from 'src/components/Panel';
 
 const Cover = ({ typologies }) => {
   const [alltypologies] = useState(typologies);
 
   const cards = [
     {
-      title: 'Umbu |',
+      title: 'Umbu ',
       text: 'Inspirada nas antigas luminárias dos anos 70',
       image: 'images/banner/index.png',
     },
@@ -62,8 +70,12 @@ const Cover = ({ typologies }) => {
               alignItems="center"
               justifyContent="center"
             >
-              <Heading pb="30px">Tipologias</Heading>
-              <Text pb="30px">O tipo ideal de luminária para seu ambiente</Text>
+              <Heading fontSize="6xl" pb="30px">
+                Tipologias
+              </Heading>
+              <Text fontSize="18px" pb="30px">
+                O tipo ideal de luminária para seu ambiente
+              </Text>
             </Flex>
             <Wrap pb={20}>
               {alltypologies.map((tech, index) => (
@@ -75,7 +87,7 @@ const Cover = ({ typologies }) => {
                     flexDirection="column"
                   >
                     <Image
-                      src={tech.products[0].photo[1].url}
+                      src={tech.products[0].photo[0].url}
                       alt={tech.name}
                       width={180}
                       height={180}
@@ -103,11 +115,43 @@ const Cover = ({ typologies }) => {
   );
 };
 
-export default function Home({ typologies, lines }) {
+export default function Home({ typologies, lines, designers }) {
   return (
     <Layout>
       <Cover typologies={typologies} />
       <LinhasProdutos lines={lines} />
+      <Panel
+        slidesToShow={3}
+        HeadingTitle="Designers"
+        description="Designers renomados que fazem parte da nossa história"
+      >
+        {designers.map((items, index) => (
+          <Flex
+            w="20%"
+            alignItems="center"
+            justifyContent="center"
+            key={index}
+            p="80px"
+          >
+            <Flex w="100%" alignItems="center" justifyContent="center">
+              <Image
+                src={items.photo.map((item) => item.url)}
+                w="20vw"
+                h="40vh"
+                objectFit="cover"
+              />
+            </Flex>
+            <Flex p="30" alignItems="center" justifyContent="center">
+              <Heading textTransform="capitalize">{items.name}</Heading>
+            </Flex>
+            <Flex alignItems="center" justifyContent="center">
+              <Text textAlign="center" fontSize="2xl">
+                {items.text}
+              </Text>
+            </Flex>
+          </Flex>
+        ))}
+      </Panel>
     </Layout>
   );
 }
@@ -115,11 +159,12 @@ export default function Home({ typologies, lines }) {
 export const getStaticProps = async () => {
   const typologies = await getAllTypologies();
   const lines = await getAllLines();
-
+  const designers = await getAllDesigners();
   return {
     props: {
       typologies,
       lines,
+      designers,
     },
     revalidate: 10,
   };

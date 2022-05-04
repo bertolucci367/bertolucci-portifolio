@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 /* eslint-disable */
+import React, { useState } from 'react';
 import {
   Box,
   IconButton,
@@ -18,12 +18,12 @@ import Slider from 'react-slick';
 const settings = {
   dots: false,
   arrows: true,
-  fade: true,
+  fade: false,
   infinite: true,
   autoplay: true,
   speed: 500,
   autoplaySpeed: 5000,
-  slidesToShow: 1,
+  slidesToShow: 2,
   slidesToScroll: 2,
 };
 
@@ -37,13 +37,7 @@ export default function SliderCardsCarrousel({ lines }) {
   const side = useBreakpointValue({ base: '30%', md: '40px' });
 
   return (
-    <Box
-      height={'400px'}
-      position={'relative'}
-      width={'full'}
-      overflow={'hidden'}
-    >
-      {/* CSS files for react-slick */}
+    <Box  position="relative" width="full" overflow="hidden">
       <link
         rel="stylesheet"
         type="text/css"
@@ -75,7 +69,7 @@ export default function SliderCardsCarrousel({ lines }) {
         position="absolute"
         right={side}
         top={top}
-        transform={'translate(0%, -50%)'}
+        transform="translate(0%, -50%)"
         zIndex={2}
         onClick={() => slider?.slickNext()}
       >
@@ -84,21 +78,26 @@ export default function SliderCardsCarrousel({ lines }) {
 
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {lines.map((items, index) => (
-          <Flex alignItems="center" justifyContent="center" key={index}>
+          <Flex
+            w="full"
+            alignItems="center"
+            justifyContent="center"
+            key={index}
+            p="80px"
+          >
             <Flex w="100%" alignItems="center" justifyContent="center">
               <Image
                 src={items.products.map((item, index) => item.photo[index].url)}
-                w="200px"
-                h="200px"
-                alignItems="center"
-                justifyContent="center"
+                w="20vw"
+                h="30vh"
+                objectFit="cover"
               />
             </Flex>
             <Flex p="30" alignItems="center" justifyContent="center">
               <Heading textTransform="capitalize">{items.name}</Heading>
             </Flex>
             <Flex alignItems="center" justifyContent="center">
-              <Text>
+              <Text fontSize="2xl">
                 {items.products.map((item) =>
                   JSON.stringify(item.description?.text),
                 )}

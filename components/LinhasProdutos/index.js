@@ -1,4 +1,4 @@
-import SliderCardsCarrousel from 'src/components/SliderCardsCarrousel';
+import SliderCardsCarrousel from 'src/components/SliderBannerCarrousel';
 
 import { useColorModeValue, Flex, Heading, Text, Box } from '@chakra-ui/react';
 
@@ -22,18 +22,12 @@ const LinhasProdutos = ({ lines }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <Heading pb="30px">Coleções</Heading>
+          <Heading fontSize="6xl" pb="30px">Coleções</Heading>
 
-          <Text pb="10px">Conheça cada detalhe de nossas linhas</Text>
+          <Text fontSize="3xl" pb="10px">Conheça cada detalhe de nossas linhas</Text>
         </Flex>
 
-        <Flex
-          px={[2, 2]}
-          py={[0, 10]}
-          w="full"
-          maxW="1200px"
-          direction="column"
-        >
+        <Flex px={[2, 2]} py={[0, 10]} w="full" direction="column">
           <Box w="100%">
             <SliderCardsCarrousel lines={lines} />
           </Box>
@@ -42,13 +36,15 @@ const LinhasProdutos = ({ lines }) => {
 
       <Flex
         bgColor={bgColorPersona}
+        flex
         alignItems="center"
         justifyContent="space-between"
         p="50"
+        w="full"
       >
-        <Box w="50%" p="10px">
-          <Flex direction="column" p="10px">
-            <Heading fontSize="4xl">Persona</Heading>
+        <Box w="100%" p="10px" flex alignItems="center" justifyContent="center">
+          <Flex direction="column"  p="10px">
+            <Heading fontSize="6xl">Persona</Heading>
             <Text fontSize="2xl" fontWeight="600">
               Luminárias únicas feitas para você
             </Text>
