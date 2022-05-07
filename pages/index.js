@@ -4,7 +4,6 @@ import { useState } from 'react';
 //Chackra UI
 import {
   Box,
-  Button,
   Image,
   Text,
   Flex,
@@ -13,15 +12,12 @@ import {
   WrapItem,
   Center,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 
 //Components
 import Layout from 'src/components/Layout';
 
-import Carousel from 'src/components/SliderCarousel';
-
-import LinhasProdutos from 'src/components/LinhasProdutos';
+import Banner from 'src/components/Banner';
 
 //Libs
 import {
@@ -29,18 +25,19 @@ import {
   getAllLines,
   getAllTypologies,
 } from 'src/lib/graphcms';
-import Panel from 'src/components/Panel';
 
+import Panel from 'src/components/Panel';
+import LinhasProdutos from 'src/components/LinhasProdutos';
+
+const cards = [
+  {
+    title: 'Umbu ',
+    text: 'Inspirada nas antigas luminárias dos anos 70',
+    image: 'images/banner/index.png',
+  },
+];
 const Cover = ({ typologies }) => {
   const [alltypologies] = useState(typologies);
-
-  const cards = [
-    {
-      title: 'Umbu ',
-      text: 'Inspirada nas antigas luminárias dos anos 70',
-      image: 'images/banner/index.png',
-    },
-  ];
 
   const bgColor = useColorModeValue('#fff', '#1A202C');
 
@@ -53,7 +50,7 @@ const Cover = ({ typologies }) => {
         py={20}
       >
         <Box w="full">
-          <Carousel cards={cards} />
+          <Banner cards={cards} />
         </Box>
 
         <Flex
@@ -119,20 +116,51 @@ export default function Home({ typologies, lines, designers }) {
   return (
     <Layout>
       <Cover typologies={typologies} />
-      <LinhasProdutos lines={lines} />
+
       <Panel
-        slidesToShow={3}
-        HeadingTitle="Designers"
-        description="Designers renomados que fazem parte da nossa história"
+        fade={false}
+        slidesToShow={2}
+        HeadingTitle="Coleções"
+        description="Conheça cada detalhe de nossas linhas"
       >
-        {designers.map((items, index) => (
+        {lines.map((items, index) => (
           <Flex
-            w="20%"
+            w="full"
             alignItems="center"
             justifyContent="center"
             key={index}
             p="80px"
           >
+            <Flex w="100%" alignItems="center" justifyContent="center">
+              <Image
+                src={items.products.map((item, index) => item.photo[index].url)}
+                w="20vw"
+                h="30vh"
+                objectFit="cover"
+              />
+            </Flex>
+            <Flex p="30" alignItems="center" justifyContent="center">
+              <Heading textTransform="capitalize">{items.name}</Heading>
+            </Flex>
+            <Flex alignItems="center" justifyContent="center">
+              <Text fontSize="2xl">
+                {items.products.map((item) =>
+                  JSON.stringify(item.description?.text),
+                )}
+              </Text>
+            </Flex>
+          </Flex>
+        ))}
+      </Panel>
+      <LinhasProdutos />
+      <Panel
+        fade={false}
+        slidesToShow={3}
+        HeadingTitle="Designers"
+        description="Designers renomados que fazem parte da nossa história"
+      >
+        {designers.map((items, index) => (
+          <Flex w="20%" alignItems="center" justifyContent="center" key={index}>
             <Flex w="100%" alignItems="center" justifyContent="center">
               <Image
                 src={items.photo.map((item) => item.url)}
@@ -141,10 +169,10 @@ export default function Home({ typologies, lines, designers }) {
                 objectFit="cover"
               />
             </Flex>
-            <Flex p="30" alignItems="center" justifyContent="center">
+            <Flex p="30px" alignItems="center" justifyContent="center">
               <Heading textTransform="capitalize">{items.name}</Heading>
             </Flex>
-            <Flex alignItems="center" justifyContent="center">
+            <Flex px="32px" alignItems="center" justifyContent="center">
               <Text textAlign="center" fontSize="2xl">
                 {items.text}
               </Text>
@@ -152,6 +180,9 @@ export default function Home({ typologies, lines, designers }) {
           </Flex>
         ))}
       </Panel>
+      <Box w="full">
+        <Banner cards={cards} />
+      </Box>
     </Layout>
   );
 }

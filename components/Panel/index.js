@@ -19,7 +19,7 @@ const Panel = ({ slidesToShow, fade, HeadingTitle, description, children }) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Heading fontSize="6xl" pb="30px">
+        <Heading fontSize="6xl" pb="20px">
           {HeadingTitle}
         </Heading>
 

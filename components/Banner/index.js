@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 /* eslint-disable */
+import React, { useState } from 'react';
+
 import {
   Box,
   IconButton,
@@ -11,7 +12,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+//import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 import Slider from 'react-slick';
 
@@ -28,7 +29,7 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function CaptionCarousel({ cards }) {
+export default function Banner({ cards, isSlider }) {
   const [slider, setSlider] = useState(null);
 
   const top = useBreakpointValue({ base: '90%', md: '50%' });
@@ -36,43 +37,47 @@ export default function CaptionCarousel({ cards }) {
 
   return (
     <Box position="relative" height="600px" width="full" overflow="hidden">
-      {/* <link
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      /> */}
-      {/* Left Icon */}
-      {/* <IconButton
-        aria-label="left-arrow"
-        variant="ghost"
-        position="absolute"
-        left={side}
-        top={top}
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickPrev()}
-      >
-        <BiLeftArrowAlt size="40px" />
-      </IconButton> */}
-      {/* Right Icon */}
-      {/*  <IconButton
-        aria-label="right-arrow"
-        variant="ghost"
-        position="absolute"
-        right={side}
-        top={top}
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickNext()}
-      >
-        <BiRightArrowAlt size="40px" />
-      </IconButton> */}
+      {isSlider && (
+        <>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            charSet="UTF-8"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+          />
+
+          <IconButton
+            aria-label="left-arrow"
+            variant="ghost"
+            position="absolute"
+            left={side}
+            top={top}
+            transform={'translate(0%, -50%)'}
+            zIndex={2}
+            onClick={() => slider?.slickPrev()}
+          >
+            <BiLeftArrowAlt size="40px" />
+          </IconButton>
+          <IconButton
+            aria-label="right-arrow"
+            variant="ghost"
+            position="absolute"
+            right={side}
+            top={top}
+            transform={'translate(0%, -50%)'}
+            zIndex={2}
+            onClick={() => slider?.slickNext()}
+          >
+            <BiRightArrowAlt size="40px" />
+          </IconButton>
+        </>
+      )}
+
 
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
@@ -97,7 +102,6 @@ export default function CaptionCarousel({ cards }) {
                 top="50%"
                 transform="translate(0, -50%)"
                 direction="row"
-                
                 alignItems="center"
                 justifyContent="space-between"
               >
@@ -105,7 +109,12 @@ export default function CaptionCarousel({ cards }) {
                   <Heading fontSize="6xl">{card.title}</Heading>
                 </Box>
                 <Flex w="full" alignItems="center" justifyContent="center">
-                  <Text w="full" fontSize="2xl" fontWeight="bold" color="GrayText">
+                  <Text
+                    w="full"
+                    fontSize="2xl"
+                    fontWeight="bold"
+                    color="GrayText"
+                  >
                     {card.text}
                   </Text>
                 </Flex>
