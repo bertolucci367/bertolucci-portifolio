@@ -47,7 +47,7 @@ const Topbar = () => {
   const menuitems = [
     {
       title: 'Produtos',
-      url: '',
+      url: '/products',
     },
     {
       title: 'Designers',
