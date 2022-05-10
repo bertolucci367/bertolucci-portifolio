@@ -5,7 +5,6 @@ import Carrousel from '../Carrousel';
 const Panel = ({ slidesToShow, fade, HeadingTitle, description, children }) => {
   const bgColorPanel = useColorModeValue('#f4f4f4', '#000111');
 
-
   return (
     <Flex
       direction="column"

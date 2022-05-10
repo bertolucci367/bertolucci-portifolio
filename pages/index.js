@@ -25,7 +25,7 @@ import {
   getAllLines,
   getAllTypologies,
 } from 'src/lib/graphcms';
-
+import Footer from 'src/components/Footer'
 import Panel from 'src/components/Panel';
 import LinhasProdutos from 'src/components/LinhasProdutos';
 
@@ -183,6 +183,7 @@ export default function Home({ typologies, lines, designers }) {
       <Box w="full">
         <Banner cards={cards} />
       </Box>
+     <Footer/>
     </Layout>
   );
 }
