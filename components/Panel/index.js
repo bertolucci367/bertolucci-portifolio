@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useColorModeValue, Flex, Heading, Text, Box } from '@chakra-ui/react';
 
 import Carrousel from '../Carrousel';
