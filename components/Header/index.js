@@ -47,7 +47,7 @@ const Topbar = () => {
   const menuitems = [
     {
       title: 'Produtos',
-      url: '',
+      url: '/products',
     },
     {
       title: 'Designers',
@@ -90,31 +90,35 @@ const Topbar = () => {
         justifyContent="space-between"
         maxW="1200px"
         margin="0 auto"
-        w="full"
+        w="50%"
         h="80px"
         px={[4, 8]}
       >
         <Flex alignItems="center" justifyContent="center" w="100%">
           <Menu>
             {menuitems.map((items, index) => (
-              <MenuButton
+              <Button
+                as={Button}
                 key={index}
-                px={4}
-                py={2}
+                bg="transparent"
                 fontWeight="500"
                 transition="all 0.2s"
-                _hover={{ textDecoration: 'underline', fontWeight: 700 }}
-                _expanded={{ bg: 'blue.400' }}
-                _focus={{ boxShadow: 'outline' }}
+                _hover={{
+                  backgroundColor: 'transparent',
+                  textDecoration: 'underline',
+                  fontWeight: 700,
+                }}
+                _expanded={{ backgroundColor: 'transparent' }}
+                _active={{ bg: 'transparent', boxShadow: 'none' }}
               >
-                {items.title}
-              </MenuButton>
+                <Link href={items.url}>{items.title}</Link>
+              </Button>
             ))}
           </Menu>
         </Flex>
         <Flex>
           {user ? (
-            <Flex pr="20px">
+            <Flex p="20px">
               <Menu>
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                   <FiUser title="Logado" size={20} />
@@ -156,22 +160,6 @@ const Topbar = () => {
                 </span>
               </Button>
             </Flex>
-          )}
-
-          {colorMode === 'light' ? (
-            <MoonIcon
-              w={6}
-              h={6}
-              onClick={toggleColorMode}
-              onMouseEnter={(e) => (e.target.style.cursor = 'pointer')}
-            />
-          ) : (
-            <SunIcon
-              w={6}
-              h={6}
-              onClick={toggleColorMode}
-              onMouseEnter={(e) => (e.target.style.cursor = 'pointer')}
-            />
           )}
         </Flex>
       </Flex>
