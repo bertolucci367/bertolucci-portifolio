@@ -25,7 +25,7 @@ import {
   getAllLines,
   getAllTypologies,
 } from 'src/lib/graphcms';
-
+import Footer from 'src/components/Footer';
 import Panel from 'src/components/Panel';
 import LinhasProdutos from 'src/components/LinhasProdutos';
 
@@ -34,6 +34,15 @@ const cards = [
     title: 'Umbu ',
     text: 'Inspirada nas antigas luminárias dos anos 70',
     image: 'images/banner/index.png',
+  },
+];
+
+const imagesBanner = [
+  {
+    image: 'images/banner/index.png',
+  },
+  {
+    image: 'images/banner/fabricaBertolucci.jpg',
   },
 ];
 const Cover = ({ typologies }) => {
@@ -181,8 +190,9 @@ export default function Home({ typologies, lines, designers }) {
         ))}
       </Panel>
       <Box w="full">
-        <Banner cards={cards} />
+        <Banner isSlider cards={imagesBanner} dots arrows />
       </Box>
+      <Footer />
     </Layout>
   );
 }
