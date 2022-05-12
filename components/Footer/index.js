@@ -85,14 +85,6 @@ export default function LargeWithNewsletter() {
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
-            <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
-            <Link href="#">Cuidados com suas luminárias</Link>
-            <Link href="#">Visite nosso Showroom</Link>
-            <Link href="#">Termos e condições de venda</Link>
-            <Link href="#">Política de Privacidade</Link>
-          </Stack>
-
           <Stack align={isLargerThan500 ? 'center' : 'flex-start'} spacing={6}>
             <ListHeader>
               Não se preocupe, nós também não gostamos de spam.
@@ -117,6 +109,20 @@ export default function LargeWithNewsletter() {
                 icon={<BiMailSend />}
               />
             </Stack>
+          </Stack>
+          <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
+            <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
+            <Link href="#">Cuidados com suas luminárias</Link>
+            <Link href="#">Visite nosso Showroom</Link>
+            <Link href="#">Termos e condições de venda</Link>
+            <Link href="#">Política de Privacidade</Link>
+          </Stack>
+          <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
+            <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
+            <Link href="#">Cuidados com suas luminárias</Link>
+            <Link href="#">Visite nosso Showroom</Link>
+            <Link href="#">Termos e condições de venda</Link>
+            <Link href="#">Política de Privacidade</Link>
           </Stack>
         </SimpleGrid>
       </Container>

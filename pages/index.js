@@ -170,15 +170,20 @@ export default function Home({ typologies, lines, designers }) {
       >
         {designers.map((items, index) => (
           <Flex w="20%" alignItems="center" justifyContent="center" key={index}>
-            <Flex w="100%" alignItems="center" justifyContent="center">
+            <Flex
+              w="100%"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Image
                 src={items.photo.map((item) => item.url)}
-                w="20vw"
-                h="40vh"
-                objectFit="cover"
+                w="30vw"
+                h="25vh"
+                objectFit="contain"
+               
               />
             </Flex>
-            <Flex p="30px" alignItems="center" justifyContent="center">
+            <Flex p="20px" alignItems="center" justifyContent="center">
               <Heading textTransform="capitalize">{items.name}</Heading>
             </Flex>
             <Flex px="32px" alignItems="center" justifyContent="center">
@@ -191,6 +196,24 @@ export default function Home({ typologies, lines, designers }) {
       </Panel>
       <Box w="full">
         <Banner isSlider cards={imagesBanner} dots arrows />
+      </Box>
+      <Box bg="white">
+        <Heading pt="5" textAlign="center">
+          Nossa História
+        </Heading>
+        <Text p="5">
+          A pequena oficina de luminárias nos anos 50 transformou-se, hoje, em
+          uma consolidada empresa do setor, que cria, fabrica e comercializa
+          peças, desde o conceito criativo à fabricação de todos os componentes,
+          até a entrega do produto final.
+        </Text>
+        <Text p="5">
+          Atualmente especializada no modelo fabril artesanal, a Bertolucci tem
+          mais de 250 produtos de fabricação própria com mais de 200 opções de
+          acabamentos diferentes, todos feitos com matérias-primas 100%
+          nacionais e assinados por profissionais influentes no mercado
+          brasileiro de arquitetura e design.
+        </Text>
       </Box>
       <Footer />
     </Layout>
