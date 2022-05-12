@@ -25,12 +25,19 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon,  AddIcon, MinusIcon, Search2Icon } from '@chakra-ui/icons'
 import Layout from 'src/components/Layout';
+import PaginatedItems from 'pages/products/paginate';
 
 import {
-  getAllProductsThumbs,
+  getAllProductsThumbs, getAllProductsCount
 } from 'src/lib/graphcms';
 
-console.log(getAllProductsThumbs())
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
+
+// ==============================================
+
+
 
 let temp = new Array(12).fill({'hello':'goodbye'});
 let categorias = [
@@ -74,9 +81,60 @@ let categorias = [
   }
 ]
 
-let paginacao = ["1","2","3","4","5","6","7","...","50",]
+let items = [];
 
-export default function  Products() {
+for(var i = 0; i < 100; i++){
+  items.push(i)
+}
+
+function Items({ currentItems }) {
+  return (
+    <>
+    {currentItems &&
+      currentItems.map((item,key) => (
+        <Box flex="30%" m="10px" key={key}>
+          <Center flex="1">
+            <Box flex="1" h="350px" bg="lightgray"></Box>
+          </Center>
+          <Center flex="1" mt="10px">
+            <Text fontSize="20px" textTransform="capitalize">{ item.name
+              //.replaceAll(new RegExp(/\..*/g),"")
+               }</Text>
+          </Center>
+        </Box>
+      ))}
+      </>
+  )
+}
+
+const productsQtd = 42
+
+
+export default function Products({ products, productsCount }) {
+  
+  const [ currentItems, setCurrentItems ] = useState(null);
+  const [ setPageCount] = useState(0);
+  const [ itemOffset, setItemOffset ] = useState(0);
+  const itemsPerPage = productsQtd
+  const pageCount = productsCount / productsQtd
+
+  if(!currentItems){
+    setCurrentItems(products)
+  }
+
+  useEffect(() => {
+    console.log(currentItems)
+  }, []);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    getAllProductsThumbs(event.selected,productsQtd).then((x)=>{setCurrentItems(x)})
+    setItemOffset(newOffset);
+  };
+
   return (
     <Layout>
         <Box flex='1' mt='85px'>
@@ -125,12 +183,12 @@ export default function  Products() {
           <Flex>
             <Box w='200px' pr="20px">
               {categorias.map( (items, index) =>(
-                  <Box borderBottom="2px solid lightgray" py="10px">
+                  <Box borderBottom="2px solid lightgray" py="10px" key={index}>
                     <Heading as="h2" size="l" pl="10px">{ items.nome } <MinusIcon pb="3px"/></Heading>
                     <List p="15px">
-                      { items.items.map((x, y) => (
-                          <ListItem>
-                            <Checkbox mr="20px" mt="3px"></Checkbox>{x}
+                      { items.items.map((x1, y1) => (
+                          <ListItem key={y1}>
+                            <Checkbox mr="20px" mt="3px"></Checkbox>{x1}
                           </ListItem>
                         ))
                       }
@@ -140,35 +198,47 @@ export default function  Products() {
             </Box>
             <Box flex="1">
               <Flex direction="row" wrap="wrap" w="100%">
-                {temp.map((x,y)=>(
-                  <Box flex="30%" m="10px">
-                  <Center flex="1">
-                    <Box flex="1" h="250px" bg="lightgray"></Box>
-                  </Center>
-                  <Center flex="1" mt="10px">
-                    <Text>Nome</Text>
-                  </Center>
-                </Box>
-                ))}
+              <Items currentItems={currentItems} />
+              <style global jsx>{`
+                  ul.paginate li {
+                    display: inline;
+                    padding: 0px 7px;
+                    font-weight: bold;
+                    font-size: 20px;
+                  }
+
+                  ul.paginate li.selected {
+                    font-size: 25px;
+                  }
+                `}</style>
+                <Center w="100%" py="20px">
+                  <ReactPaginate
+                    className="paginate"
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={Math.ceil(pageCount)}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                  />
+                </Center>
               </Flex>
             </Box>      
           </Flex>
         </Box>
-        <Box>
-        <Flex>
-          <Box w='200px'>
-          </Box>
-          <Box w="100%" my="20px">
-            <Flex>
-              <Center flex="1">
-                {paginacao.map((item, key)=>(
-                  <Link px="5px" fontWeight="bold" fontSize="20px">{item}</Link>))
-                }
-              </Center>
-            </Flex>
-          </Box>
-        </Flex>
-        </Box>
     </Layout>
     );
 }
+
+export const getStaticProps = async () => {
+  const products = await getAllProductsThumbs(0,productsQtd)
+  const productsCount = await getAllProductsCount()
+  return {
+    props: {
+      products,
+      productsCount
+    },
+    revalidate: 10,
+  };
+};
