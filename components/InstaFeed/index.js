@@ -1,6 +1,6 @@
-import { Flex, Image, SimpleGrid, Box, Heading } from '@chakra-ui/react';
-
 /* eslint-disable */
+import { Flex, SimpleGrid, Box, Heading } from '@chakra-ui/react';
+
 export default function InstagramFeed({ instagramPosts }) {
   console.log(instagramPosts);
   return (

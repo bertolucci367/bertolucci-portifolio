@@ -47,10 +47,10 @@ class MyDocument extends Document {
               zIndex: '1000',
             }}
             target="_blank"
+            rel="noreferrer"
           >
             <i style={{ marginTop: '16px' }} className="fa fa-whatsapp"></i>
           </a>
-          
         </body>
       </Html>
     );
