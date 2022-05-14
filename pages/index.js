@@ -1,134 +1,64 @@
 /* eslint-disable */
-//Native Imports
-import { useState } from 'react';
-//Chackra UI
+
+//External libs
+
+//Chakra UI
 import {
   Box,
   Image,
   Text,
   Flex,
   Heading,
-  Wrap,
-  WrapItem,
-  Center,
-  useColorModeValue,
+  useMediaQuery,
 } from '@chakra-ui/react';
 
 //Components
-import Layout from 'src/components/Layout';
+import Layout from 'src/components/Templates/Layout';
 
-import Banner from 'src/components/Banner';
+import Banner from 'src/components/AllBannersSliders/Structural/Banner';
+
+import Footer from 'src/components/Templates/Footer';
+
+import Panel from 'src/components/AllBannersSliders/Structural/Panel';
+
+import { PanelNossaHistoriaHome } from 'src/components/PanelNossaHistoriaHome';
+
+import PersonaSection from 'src/components/PersonaSection';
+
+import { Cover } from 'src/components/TipologyPanel';
+
+import BannerSliderHome from 'src/components/AllBannersSliders/BannerSliderHome';
 
 //Libs
 import {
   getAllDesigners,
   getAllLines,
+  getSliderHome,
   getAllTypologies,
+  getSliderOurHistory,
+  instaFeed,
 } from 'src/lib/graphcms';
-import Footer from 'src/components/Footer';
-import Panel from 'src/components/Panel';
-import LinhasProdutos from 'src/components/LinhasProdutos';
+import InstagramFeed from 'src/components/InstaFeed';
 
-const cards = [
-  {
-    title: 'Umbu ',
-    text: 'Inspirada nas antigas luminárias dos anos 70',
-    image: 'images/banner/index.png',
-  },
-];
-
-const imagesBanner = [
-  {
-    image: 'images/banner/index.png',
-  },
-  {
-    image: 'images/banner/fabricaBertolucci.jpg',
-  },
-];
-const Cover = ({ typologies }) => {
-  const [alltypologies] = useState(typologies);
-
-  const bgColor = useColorModeValue('#fff', '#1A202C');
-
-  return (
-    <Box bgColor={bgColor}>
-      <Flex
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        py={20}
-      >
-        <Box w="full">
-          <Banner cards={cards} />
-        </Box>
-
-        <Flex
-          px={[2, 8]}
-          py={[0, 10]}
-          w="full"
-          maxW="1200px"
-          direction="column"
-        >
-          <Box w="full">
-            <Flex
-              direction="column"
-              p="30px"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Heading fontSize="6xl" pb="30px">
-                Tipologias
-              </Heading>
-              <Text fontSize="18px" pb="30px">
-                O tipo ideal de luminária para seu ambiente
-              </Text>
-            </Flex>
-            <Wrap pb={20}>
-              {alltypologies.map((tech, index) => (
-                <WrapItem key={index}>
-                  <Center
-                    w="200px"
-                    h="200px"
-                    overflow="hidden"
-                    flexDirection="column"
-                  >
-                    <Image
-                      src={tech.products[0].photo[0].url}
-                      alt={tech.name}
-                      width={180}
-                      height={180}
-                      title={tech.name}
-                      objectFit="cover"
-                      objectPosition={'center'}
-                    />
-                    <Text
-                      fontSize="xl"
-                      textAlign="center"
-                      fontWeight="800"
-                      mt={2}
-                      textTransform="capitalize"
-                    >
-                      {tech.name}
-                    </Text>
-                  </Center>
-                </WrapItem>
-              ))}
-            </Wrap>
-          </Box>
-        </Flex>
-      </Flex>
-    </Box>
-  );
-};
-
-export default function Home({ typologies, lines, designers }) {
+export default function Home({
+  typologies,
+  lines,
+  designers,
+  slidersHome,
+  sliderNossaHistoria,
+  instaFeed,
+}) {
+  const [isLargeThan700] = useMediaQuery('(max-width:700px)');
+  console.log(instaFeed);
   return (
     <Layout>
+      <BannerSliderHome sliders={slidersHome} dots isSlider arrows />
       <Cover typologies={typologies} />
 
       <Panel
         fade={false}
-        slidesToShow={2}
+        slidesToShow={isLargeThan700 ? 1 : 2}
+        slidesToScroll={isLargeThan700 ? 1 : 2}
         HeadingTitle="Coleções"
         description="Conheça cada detalhe de nossas linhas"
       >
@@ -138,21 +68,29 @@ export default function Home({ typologies, lines, designers }) {
             alignItems="center"
             justifyContent="center"
             key={index}
-            p="80px"
           >
             <Flex w="100%" alignItems="center" justifyContent="center">
               <Image
                 src={items.products.map((item, index) => item.photo[index].url)}
-                w="20vw"
-                h="30vh"
-                objectFit="cover"
+                w="100%"
+                h="44vh"
+                objectFit="contain"
               />
             </Flex>
-            <Flex p="30" alignItems="center" justifyContent="center">
+
+            <Flex px="30" alignItems="center" justifyContent="center">
               <Heading textTransform="capitalize">{items.name}</Heading>
             </Flex>
+
             <Flex alignItems="center" justifyContent="center">
-              <Text fontSize="2xl">
+              <Text
+                fontSize="2xl"
+                px="20"
+                w="900px"
+                whiteSpace="nowrap"
+                overflow="hidden"
+                textOverflow="ellipsis"
+              >
                 {items.products.map((item) =>
                   JSON.stringify(item.description?.text),
                 )}
@@ -161,74 +99,101 @@ export default function Home({ typologies, lines, designers }) {
           </Flex>
         ))}
       </Panel>
-      <LinhasProdutos />
+
+      <PersonaSection />
+
       <Panel
         fade={false}
-        slidesToShow={3}
+        slidesToShow={1}
         HeadingTitle="Designers"
         description="Designers renomados que fazem parte da nossa história"
       >
         {designers.map((items, index) => (
-          <Flex w="20%" alignItems="center" justifyContent="center" key={index}>
+          <Flex
+            w="100%"
+            alignItems="center"
+            justifyContent="center"
+            key={index}
+          >
             <Flex
               w="100%"
               alignItems="center"
               justifyContent="center"
+              cursor="pointer"
+              onClick={() => alert(true)}
             >
               <Image
                 src={items.photo.map((item) => item.url)}
-                w="30vw"
-                h="25vh"
+                w="100%"
+                h="55vh"
                 objectFit="contain"
-               
               />
             </Flex>
+
             <Flex p="20px" alignItems="center" justifyContent="center">
               <Heading textTransform="capitalize">{items.name}</Heading>
             </Flex>
+
             <Flex px="32px" alignItems="center" justifyContent="center">
-              <Text textAlign="center" fontSize="2xl">
+              <Text
+                textAlign="center"
+                fontSize="2xl"
+                w="900px"
+                whiteSpace="nowrap"
+                overflow="hidden"
+                textOverflow="ellipsis"
+              >
                 {items.text}
               </Text>
             </Flex>
           </Flex>
         ))}
       </Panel>
+
       <Box w="full">
-        <Banner isSlider cards={imagesBanner} dots arrows />
+        <Banner isSlider dots arrows>
+          {sliderNossaHistoria.map((items, index) => {
+            return (
+              <Box
+                key={index}
+                h="700px"
+                position="relative"
+                backgroundPosition="center"
+                backgroundRepeat="no-repeat"
+                backgroundSize="cover"
+                bgImage={`url(${items.photoNossaHistoriaSlider.url})`}
+                w="full"
+              ></Box>
+            );
+          })}
+        </Banner>
       </Box>
-      <Box bg="white">
-        <Heading pt="5" textAlign="center">
-          Nossa História
-        </Heading>
-        <Text p="5">
-          A pequena oficina de luminárias nos anos 50 transformou-se, hoje, em
-          uma consolidada empresa do setor, que cria, fabrica e comercializa
-          peças, desde o conceito criativo à fabricação de todos os componentes,
-          até a entrega do produto final.
-        </Text>
-        <Text p="5">
-          Atualmente especializada no modelo fabril artesanal, a Bertolucci tem
-          mais de 250 produtos de fabricação própria com mais de 200 opções de
-          acabamentos diferentes, todos feitos com matérias-primas 100%
-          nacionais e assinados por profissionais influentes no mercado
-          brasileiro de arquitetura e design.
-        </Text>
-      </Box>
+
+      <PanelNossaHistoriaHome />
+      <InstagramFeed instagramPosts={instaFeed} />
       <Footer />
     </Layout>
   );
 }
 
 export const getStaticProps = async () => {
+  //GraphCMS Queries
   const typologies = await getAllTypologies();
   const lines = await getAllLines();
   const designers = await getAllDesigners();
+  const slidersHome = await getSliderHome();
+  const sliderNossaHistoria = await getSliderOurHistory();
+
+  const instaFeedx = await instaFeed();
+
   return {
     props: {
       typologies,
       lines,
       designers,
+      slidersHome,
+      sliderNossaHistoria,
+      instaFeed: instaFeedx,
     },
     revalidate: 10,
   };

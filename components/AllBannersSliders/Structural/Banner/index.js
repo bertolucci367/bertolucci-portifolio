@@ -1,22 +1,20 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 
-import {
-  Box,
-  IconButton,
-  useBreakpointValue,
-  Stack,
-  Heading,
-  Text,
-  Container,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
 
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 import Slider from 'react-slick';
 
-export default function Banner({ cards, isSlider, dots, arrows, fade }) {
+export default function Banner({
+  children,
+  isSlider,
+  dots,
+  arrows,
+  fade,
+  height,
+}) {
   // Settings for the slider
   const settings = {
     dots: dots ? true : false,
@@ -32,11 +30,16 @@ export default function Banner({ cards, isSlider, dots, arrows, fade }) {
 
   const [slider, setSlider] = useState(null);
 
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
-  const side = useBreakpointValue({ base: '30%', md: '40px' });
+  const top = useBreakpointValue({ base: '30%', md: '60%' });
+  const side = useBreakpointValue({ base: '1%', md: '40px' });
 
   return (
-    <Box position="relative" height="600px" width="full" overflow="hidden">
+    <Box
+      position="relative"
+      height={height ? height : '700px'}
+      width="full"
+      overflow="hidden"
+    >
       {isSlider && (
         <>
           <link
@@ -79,48 +82,7 @@ export default function Banner({ cards, isSlider, dots, arrows, fade }) {
       )}
 
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {cards.map((card, index) => (
-          <Box
-            key={index}
-            height="3xl"
-            position="relative"
-            backgroundPosition="center"
-            backgroundRepeat="no-repeat"
-            backgroundSize="initial"
-            backgroundImage={`url(${card.image})`}
-          >
-            <Container
-              size="container.lg"
-              height="800px"
-              position="relative"
-              w="full"
-            >
-              <Flex
-                w="full"
-                position="absolute"
-                top="50%"
-                transform="translate(0, -50%)"
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Box w="full">
-                  <Heading fontSize="6xl">{card.title}</Heading>
-                </Box>
-                <Flex w="full" alignItems="center" justifyContent="center">
-                  <Text
-                    w="full"
-                    fontSize="2xl"
-                    fontWeight="bold"
-                    color="GrayText"
-                  >
-                    {card.text}
-                  </Text>
-                </Flex>
-              </Flex>
-            </Container>
-          </Box>
-        ))}
+        {children}
       </Slider>
     </Box>
   );

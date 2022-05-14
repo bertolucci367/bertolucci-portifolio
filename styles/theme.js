@@ -2,7 +2,7 @@ const theme = {
   initialColorMode: 'dark',
   fonts: {
     body:
-      'Inter,-apple-system,BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" ',
+      'Comic Sans MS,-apple-system,BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" ',
   },
   fontWeights: {
     normal: 400,

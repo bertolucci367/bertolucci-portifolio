@@ -1,10 +1,18 @@
-import { useColorModeValue, Flex, Heading, Text, Box } from '@chakra-ui/react';
+/* eslint-disable */
 
-import Image from 'next/image';
+import {
+  useColorModeValue,
+  Flex,
+  Heading,
+  Text,
+  Box,
+  useMediaQuery,
+  Image,
+} from '@chakra-ui/react';
 
-const LinhasProdutos = () => {
+const PersonaSection = () => {
   const bgColorPersona = useColorModeValue('#fff', '#1A202C');
-
+  const [isLargeThan600] = useMediaQuery('(max-width:700px)');
   return (
     <Flex
       bgColor={bgColorPersona}
@@ -13,6 +21,7 @@ const LinhasProdutos = () => {
       justifyContent="space-between"
       p="50"
       w="full"
+      flexDir={isLargeThan600 ? 'column' : 'row'}
     >
       <Box w="100%" p="10px" flex alignItems="center" justifyContent="center">
         <Flex direction="column" p="10px">
@@ -31,16 +40,13 @@ const LinhasProdutos = () => {
           </Text>
         </Flex>
       </Box>
-
-      <Box w="50%" p="10px">
-        <Image
-          src="/images/boxPersona/index.png"
-          width="500px"
-          height="300px"
-        />
-      </Box>
+      {!isLargeThan600 && (
+        <Box w="50%" p="10px">
+          <Image src="/images/boxPersona/index.png" width="100%" />
+        </Box>
+      )}
     </Flex>
   );
 };
 
-export default LinhasProdutos;
+export default PersonaSection;

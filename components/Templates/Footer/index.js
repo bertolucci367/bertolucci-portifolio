@@ -1,4 +1,11 @@
 /* eslint-disable */
+
+// Native packages
+
+import Image from 'next/image';
+
+//chakra Packages
+
 import {
   Box,
   chakra,
@@ -11,12 +18,13 @@ import {
   Input,
   IconButton,
   useColorModeValue,
+  useMediaQuery,
 } from '@chakra-ui/react';
 
+// Icones
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+
 import { BiMailSend } from 'react-icons/bi';
-import Image from 'next/image';
-import { useMediaQuery } from '@chakra-ui/react';
 
 const Logo = () => {
   return <Image src="/images/brand/index.png" width="150" height="151" />;
@@ -54,8 +62,9 @@ const ListHeader = ({ children }) => {
   );
 };
 
-export default function LargeWithNewsletter() {
+export default function Footer() {
   const [isLargerThan500] = useMediaQuery('(max-width:500px)');
+
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -63,28 +72,15 @@ export default function LargeWithNewsletter() {
     >
       <Container as={Stack} maxW={'full'} py={10}>
         <SimpleGrid
-          templateColumns={{ sm: '1fr', md: 'repeat(3,1fr)' }}
-          spacing={6}
+          templateColumns={{ sm: '1fr', md: 'repeat(4,1fr)' }}
+          spacing={12}
         >
           <Stack spacing={6}>
             <Box>
               <Logo />
             </Box>
-            <Text fontSize="sm">
-              Bertolucci © 2022, todos os direitos reservados.
-            </Text>
-            <Stack direction="row" spacing={6}>
-              <SocialButton label="Twitter" href={'#'}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label="YouTube" href={'#'}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label="Instagram" href={'#'}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
           </Stack>
+
           <Stack align={isLargerThan500 ? 'center' : 'flex-start'} spacing={6}>
             <ListHeader>
               Não se preocupe, nós também não gostamos de spam.
@@ -110,6 +106,7 @@ export default function LargeWithNewsletter() {
               />
             </Stack>
           </Stack>
+
           <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
             <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
             <Link href="#">Cuidados com suas luminárias</Link>
@@ -117,14 +114,37 @@ export default function LargeWithNewsletter() {
             <Link href="#">Termos e condições de venda</Link>
             <Link href="#">Política de Privacidade</Link>
           </Stack>
+
           <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
-            <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
-            <Link href="#">Cuidados com suas luminárias</Link>
-            <Link href="#">Visite nosso Showroom</Link>
-            <Link href="#">Termos e condições de venda</Link>
-            <Link href="#">Política de Privacidade</Link>
+            <ListHeader>Siga nos</ListHeader>
+            <Stack direction="row" spacing={6}>
+              <SocialButton label="Twitter" href={'#'}>
+                <FaTwitter />
+              </SocialButton>
+              <SocialButton label="YouTube" href={'#'}>
+                <FaYoutube />
+              </SocialButton>
+              <SocialButton label="Instagram" href={'#'}>
+                <FaInstagram />
+              </SocialButton>
+            </Stack>
+            <Link as="a" href="#">
+              11 3874 2879
+            </Link>
+            <Link as="a" href="https://wa.me/5511945219938?text=Gostei%20dos%20produtos%2C%20podemos%20conversar%20%3F">
+              11 9 4521 9938
+            </Link>
+            <Link as="a" href="#">
+              Termos e condições de venda
+            </Link>
+            <Link as="a" href="#">
+              Rua Espártaco, 367 | Lapa | São Paulo | SP
+            </Link>
           </Stack>
         </SimpleGrid>
+        <Text fontSize="sm" textAlign="center">
+          Bertolucci © 2022, todos os direitos reservados.
+        </Text>
       </Container>
     </Box>
   );

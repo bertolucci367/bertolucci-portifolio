@@ -1,0 +1,44 @@
+/* eslint-disable */
+
+import { Box, useMediaQuery } from '@chakra-ui/react';
+
+import Banner from 'src/components/AllBannersSliders/Structural/Banner';
+
+const BannerSliderHome = ({ sliders, isSlider, dots, arrows }) => {
+  const [isLargeThan700] = useMediaQuery('(max-width:700px)');
+
+  return (
+    <Box w="full" maxH={isLargeThan700 && '321px'}>
+      <Banner isSlider={isSlider} dots={dots} arrows={arrows}>
+        {sliders.map((card, index) => {
+          return (
+            <Box
+              maxH={isLargeThan700 && '421px'}
+              key={index}
+              height="700px"
+              w="full"
+              position="relative"
+              backgroundPosition="center"
+              backgroundRepeat="no-repeat"
+              backgroundSize="contain"
+              backgroundImage={`url(${card.photoBannerSlider?.map(
+                (item) => item.url,
+              )})`}
+            >
+              {/*  <Container
+                size="container.lg"
+                height="100vh"
+                position="relative"
+                w="full"
+              >
+                
+              </Container> */}
+            </Box>
+          );
+        })}
+      </Banner>
+    </Box>
+  );
+};
+
+export default BannerSliderHome;

@@ -2,26 +2,23 @@
 
 import React, { useState } from 'react';
 
-import {
-  Box,
-  IconButton,
-  useBreakpointValue,
-  Heading,
-  Text,
-  Image,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
 
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 import Slider from 'react-slick';
 
-export default function Carrousel({ fade, slidesToShow, children }) {
+export default function Carrousel({
+  fade,
+  slidesToShow,
+  slidesToScroll,
+  children,
+}) {
   const [slider, setSlider] = useState(null);
 
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
+  const top = useBreakpointValue({ base: '20%', md: '50%' });
 
-  const side = useBreakpointValue({ base: '30%', md: '40px' });
+  const side = useBreakpointValue({ base: '10%', md: '10%' });
 
   const settings = {
     dots: false,
@@ -32,7 +29,7 @@ export default function Carrousel({ fade, slidesToShow, children }) {
     speed: 500,
     autoplaySpeed: 5000,
     slidesToShow: slidesToShow,
-    slidesToScroll: 2,
+    slidesToScroll: slidesToScroll ? slidesToScroll : 1,
   };
 
   return (
@@ -56,7 +53,7 @@ export default function Carrousel({ fade, slidesToShow, children }) {
         left={side}
         top={top}
         transform="translate(0%, -50%)"
-        zIndex={2}
+        zIndex={9999}
         onClick={() => slider?.slickPrev()}
       >
         <BiLeftArrowAlt size="40px" />
@@ -69,7 +66,7 @@ export default function Carrousel({ fade, slidesToShow, children }) {
         right={side}
         top={top}
         transform="translate(0%, -50%)"
-        zIndex={2}
+        zIndex={9999}
         onClick={() => slider?.slickNext()}
       >
         <BiRightArrowAlt size="40px" />

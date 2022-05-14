@@ -51,23 +51,23 @@ const Topbar = () => {
     },
     {
       title: 'Designers',
-      url: '',
+      url: '/designers',
     },
     {
       title: 'A fábrica',
-      url: '',
+      url: '/fabrica',
     },
     {
       title: 'Persona',
-      url: '',
+      url: '/persona',
     },
     {
       title: 'Giornale',
-      url: '',
+      url: '/giornale',
     },
     {
       title: 'Contato',
-      url: '',
+      url: '/contato',
     },
   ];
 
@@ -81,8 +81,15 @@ const Topbar = () => {
       direction="column"
       zIndex={99999}
     >
-      <Flex alignItems="center" justifyContent="center" p="10px">
-        <Image src="images/logo/index.png" w="50" h="50" />
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        p="10px"
+        cursor="pointer"
+      >
+        <Link href="/">
+          <Image src="images/logo/index.png" w="50" h="50" />
+        </Link>
       </Flex>
 
       <Flex
@@ -111,7 +118,7 @@ const Topbar = () => {
                 _expanded={{ backgroundColor: 'transparent' }}
                 _active={{ bg: 'transparent', boxShadow: 'none' }}
               >
-                <Link href={items.url}>{items.title}</Link>
+                <a href={`${items.url}`}>{items.title}</a>
               </Button>
             ))}
           </Menu>
