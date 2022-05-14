@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ColorModeScript } from '@chakra-ui/react';
 import theme from 'src/styles/theme';
@@ -49,7 +50,7 @@ class MyDocument extends Document {
             target="_blank"
             rel="noreferrer"
           >
-            <i style={{ marginTop: '16px' }} className="fa fa-whatsapp"></i>
+            <i style={{ marginTop: '16px' }} className="fa fa-whatsapp" />
           </a>
         </body>
       </Html>
