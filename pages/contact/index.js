@@ -5,7 +5,6 @@
 //Chakra UI
 import {
   Box,
-  Image,
   Text,
   Flex,
   Heading,
@@ -22,14 +21,8 @@ import Footer from 'src/components/Templates/Footer';
 import Banner from 'src/components/AllBannersSliders/Structural/Banner';
 
 //Libs
-import {
-  getAllDesigners,
-  getAllLines,
-  getSliderHome,
-  getAllTypologies,
-  getSliderOurHistory,
-} from 'src/lib/graphcms';
-import Link from 'next/link';
+import { getSliderOurHistory } from 'src/lib/graphcms';
+import { Form } from 'src/components/Form';
 
 export default function Contato({ sliderNossaHistoria }) {
   const [isLargeThan700] = useMediaQuery('(max-width:700px)');
@@ -108,7 +101,43 @@ export default function Contato({ sliderNossaHistoria }) {
         orientation="horizontal"
         variant="solid"
       />
-      <Text>blablabal</Text>
+
+      <Flex flexDirection="column">
+        <Flex flexDirection={isLargeThan700 && 'column-reverse'}>
+          <Box
+            my={isLargeThan700 ? '10' : '90'}
+            px="20"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Heading
+              mb="10"
+              mt={isLargeThan700 && '-20'}
+              pt="0"
+            >
+              Conheça a nossa fábrica
+            </Heading>
+            <Text mb="5">
+              Você quer mais informações? Caso não tenha encontrado as
+              informações necessárias, não hesite em nos contactar preenchendo o
+              formulário ao lado.
+            </Text>
+            <Text mb="5">
+              Assim, a Bertolucci é a única fábrica de luminárias do Brasil que
+              abre as suas portas e mostra o “como se faz”, tendo como objetivo
+              reforçar a singularidade da produção artesanal e a sensibilização
+              da mão-de-obra por trás dos nossos produtos.
+            </Text>
+            <Text mb="5">
+              Cada luminária é única, pois é produzida com amor e inspiração do
+              artesão.
+            </Text>
+          </Box>
+          <Box w={isLargeThan700 ? '100%' : '90%'} p="50">
+            <Form />
+          </Box>
+        </Flex>
+      </Flex>
 
       <Footer />
     </Layout>

@@ -14,7 +14,6 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-
 export const Cover = ({ typologies }) => {
   const [alltypologies] = useState(typologies);
 
@@ -22,7 +21,6 @@ export const Cover = ({ typologies }) => {
 
   return (
     <Box bgColor={bgColor}>
-     
       <Flex
         direction="column"
         justifyContent="center"
@@ -43,7 +41,7 @@ export const Cover = ({ typologies }) => {
               alignItems="center"
               justifyContent="center"
             >
-              <Heading fontSize="6xl" pb="30px">
+              <Heading fontSize="3xl" pb="40px">
                 Tipologias
               </Heading>
               <Text fontSize="18px" pb="30px">
@@ -65,14 +63,13 @@ export const Cover = ({ typologies }) => {
                       width={180}
                       height={180}
                       title={tech.name}
-                      objectFit="cover"
+                      objectFit="contain"
                       objectPosition={'center'}
                     />
                     <Text
                       fontSize="xl"
                       textAlign="center"
-                      fontWeight="800"
-                      mt={2}
+                      fontWeight="500"
                       textTransform="capitalize"
                     >
                       {tech.name}

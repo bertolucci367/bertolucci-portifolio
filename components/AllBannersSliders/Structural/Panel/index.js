@@ -26,11 +26,11 @@ const Panel = ({
         alignItems="center"
         justifyContent="center"
       >
-        <Heading fontSize="6xl" pb="20px">
+        <Heading fontSize="3xl" pb="20px">
           {HeadingTitle}
         </Heading>
 
-        <Text fontSize="25px" pb="10px">
+        <Text fontSize="18px" pb="10px">
           {description}
         </Text>
       </Flex>

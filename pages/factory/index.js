@@ -6,11 +6,21 @@ import Footer from 'src/components/Templates/Footer';
 import Banner from 'src/components/AllBannersSliders/Structural/Banner';
 import StatCard from 'src/components/StatCards';
 //Chakra UI
-import { Box, Flex, Heading, Text, SimpleGrid, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  SimpleGrid,
+  Image,
+  useMediaQuery,
+} from '@chakra-ui/react';
 
 import { getSliderFabric } from 'src/lib/graphcms';
 
 export default function Fabrica({ sliderFabrica }) {
+  const [isLargeThan600] = useMediaQuery('(max-width:600px)');
+
   return (
     <Layout>
       <Banner height="800px" isSlider dots arrows>
@@ -32,16 +42,16 @@ export default function Fabrica({ sliderFabrica }) {
         })}
       </Banner>
       <Flex direction="column" alignItems="center" justifyContent="center">
-        <Heading textAlign="center" px="60" py="5">
+        <Heading textAlign="center" px={isLargeThan600 ? '0' : '60'} py="5">
           Paulistana na origem mas brasileira de alma, uma empresa em movimento.
         </Heading>
-        <Text fontSize="18" px="60" py="5">
+        <Text fontSize="18" px={isLargeThan600 ? '10' : '60'} py="5">
           Início de 1956. Nossa pequena metalúrgica, com poucos funcionários,
           abre suas portas no bairro da Lapa, zona oeste de São Paulo. O nome,
           sugestão da matriarca Dona Odette, é adotado em homenagem à família de
           seu marido e fundador, Walter Bertolucci.
         </Text>
-        <Text fontSize="18" px="60" py="5">
+        <Text fontSize="18" px={isLargeThan600 ? '10' : '60'} py="5">
           Atualmente na segunda geração com Eneida Bertolucci no comando e
           revigorados, estamos ainda hoje instalados no local de nossa fundação.
           Investimos no design brasileiro e somos avessos ao discurso das
@@ -85,16 +95,16 @@ export default function Fabrica({ sliderFabrica }) {
       </Banner>
 
       <Flex direction="column" alignItems="center" justifyContent="center">
-        <Heading textAlign="center" px="60" py="5">
+        <Heading textAlign="center" px={isLargeThan600 ? '0' : '60'} py="5">
           Com o requinte da produção artesanal.
         </Heading>
-        <Text fontSize="18" px="60" py="5">
+        <Text fontSize="18" px={isLargeThan600 ? '10' : '60'} py="5">
           A Bertolucci possui mais de 65 anos de tradição fabril, dominando todo
           o processo produtivo de suas luminárias: do conceito inicial ao
           projeto. Da montagem do protótipo à sua fabricação. Sem esquecer,
           claro, de sua comercialização.
         </Text>
-        <Text fontSize="18" px="60" py="5">
+        <Text fontSize="18" px={isLargeThan600 ? '10' : '60'} py="5">
           Além disso, entre as empresas do segmento, é a única a contar com
           design 100% nacional, produzido “in situ”. “Produzir em casa amplia
           nossas possibilidades. Se estamos com dificuldades em visualizar uma
@@ -107,7 +117,7 @@ export default function Fabrica({ sliderFabrica }) {
       </Flex>
 
       <Flex direction="column" alignItems="center" justifyContent="center">
-        <Heading textAlign="center" px="60" py="5">
+        <Heading textAlign="center" px={isLargeThan600 ? '0' : '60'} py="5">
           Alguns de nossos clientes
         </Heading>
 

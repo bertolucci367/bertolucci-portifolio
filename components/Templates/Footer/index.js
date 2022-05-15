@@ -63,7 +63,7 @@ const ListHeader = ({ children }) => {
 };
 
 export default function Footer() {
-  const [isLargerThan500] = useMediaQuery('(max-width:500px)');
+  const [isLargerThan600] = useMediaQuery('(max-width:600px)');
 
   return (
     <Box
@@ -75,13 +75,13 @@ export default function Footer() {
           templateColumns={{ sm: '1fr', md: 'repeat(4,1fr)' }}
           spacing={12}
         >
-          <Stack spacing={6}>
+          <Stack align={isLargerThan600 ? 'center' : 'flex-start'} spacing={6}>
             <Box>
               <Logo />
             </Box>
           </Stack>
 
-          <Stack align={isLargerThan500 ? 'center' : 'flex-start'} spacing={6}>
+          <Stack align={isLargerThan600 ? 'center' : 'flex-start'} spacing={6}>
             <ListHeader>
               Não se preocupe, nós também não gostamos de spam.
             </ListHeader>
@@ -107,7 +107,7 @@ export default function Footer() {
             </Stack>
           </Stack>
 
-          <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
+          <Stack align={isLargerThan600 ? 'center' : 'flex-start'}>
             <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
             <Link href="#">Cuidados com suas luminárias</Link>
             <Link href="#">Visite nosso Showroom</Link>
@@ -115,7 +115,7 @@ export default function Footer() {
             <Link href="#">Política de Privacidade</Link>
           </Stack>
 
-          <Stack align={isLargerThan500 ? 'center' : 'flex-start'}>
+          <Stack align={isLargerThan600 ? 'center' : 'flex-start'}>
             <ListHeader>Siga nos</ListHeader>
             <Stack direction="row" spacing={6}>
               <SocialButton label="Twitter" href={'#'}>

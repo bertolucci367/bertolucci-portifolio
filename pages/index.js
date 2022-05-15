@@ -79,12 +79,14 @@ export default function Home({
             </Flex>
 
             <Flex px="30" alignItems="center" justifyContent="center">
-              <Heading textTransform="capitalize">{items.name}</Heading>
+              <Heading textTransform="capitalize" fontSize="3xl">
+                {items.name}
+              </Heading>
             </Flex>
 
             <Flex alignItems="center" justifyContent="center">
               <Text
-                fontSize="2xl"
+                fontSize="18px"
                 px="20"
                 w="900px"
                 whiteSpace="nowrap"
@@ -131,13 +133,13 @@ export default function Home({
             </Flex>
 
             <Flex p="20px" alignItems="center" justifyContent="center">
-              <Heading textTransform="capitalize">{items.name}</Heading>
+              <Heading textTransform="capitalize" fontSize="3xl">{items.name}</Heading>
             </Flex>
 
             <Flex px="32px" alignItems="center" justifyContent="center">
               <Text
                 textAlign="center"
-                fontSize="2xl"
+                fontSize="18px"
                 w="900px"
                 whiteSpace="nowrap"
                 overflow="hidden"

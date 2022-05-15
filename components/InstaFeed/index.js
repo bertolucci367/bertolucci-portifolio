@@ -2,11 +2,14 @@
 import { Flex, SimpleGrid, Box, Heading } from '@chakra-ui/react';
 
 export default function InstagramFeed({ instagramPosts }) {
-  console.log(instagramPosts);
   return (
     <>
       <h2>
-        <a href="https://www.instagram.com/bertolucci.iluminacao/">
+        <a
+          href="https://www.instagram.com/bertolucci.iluminacao/"
+          referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+          target="_blank"
+        >
           <Heading pt="10" textAlign="center">
             Follow Us on Instagram
           </Heading>
@@ -15,9 +18,6 @@ export default function InstagramFeed({ instagramPosts }) {
       </h2>
 
       <ul>
-        {/* let's iterate through each of the
-         instagram posts that were returned
-         from the Instagram API*/}
         <Box mx={'auto'} py="20" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
           <SimpleGrid
             columns={{ base: 1, md: 4 }}
@@ -37,6 +37,8 @@ export default function InstagramFeed({ instagramPosts }) {
                     <a
                       href={`${item.media_url}`}
                       aria-label="view image on Instagram"
+                      target="_blank"
+                      referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
                     >
                       <Box
                         flex
