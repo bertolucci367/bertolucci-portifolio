@@ -25,7 +25,6 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon,  AddIcon, MinusIcon, Search2Icon } from '@chakra-ui/icons'
 import Layout from 'src/components/Layout';
-import PaginatedItems from 'pages/products/paginate';
 import NextLink from "next/link"
 
 import {
@@ -102,9 +101,7 @@ function Items({ currentItems }) {
             </Box>
           </Center>
           <Center flex="1" mt="10px">
-            <Text fontSize="20px" textTransform="capitalize">{ item.name
-              //.replaceAll(new RegExp(/\..*/g),"")
-               }</Text>
+            <Text fontSize="20px" textTransform="capitalize">{ item.name }</Text>
           </Center>
         </Box>
       ))}
@@ -115,7 +112,7 @@ function Items({ currentItems }) {
 const productsQtd = 42
 
 
-export default function Products({ products, productsCount, filters }) {
+export default function Products({ products, filters }) {
   
   const [ currentItems, setCurrentItems ] = useState(null);
   const [ setPageCount] = useState(0);
@@ -125,13 +122,14 @@ export default function Products({ products, productsCount, filters }) {
   const [ showMaterial, setShowMaterial ] = useState(false);
   const [ showCategory, setShowCategory ] = useState(false);
   const [ showDesigners, setShowDesigners ] = useState(false);
-  const itemsPerPage = productsQtd
+  let productsCount = products.productsConnection.aggregate.count
+  let itemsPerPage = productsCount
   const pageCount = productsCount / productsQtd
 
   // ========================================================
 
 
-  if(!currentItems){ setCurrentItems(products) }
+  if(!currentItems){ setCurrentItems(products.products) }
 
   const toggleFiltersBar = () => setShowFiltersBar(!showFiltersBar)
   const toggleTypology = () =>  setShowTypology(!showTypology)
@@ -142,43 +140,72 @@ export default function Products({ products, productsCount, filters }) {
   useEffect(() => {
   }, []);
 
-  var where = {"materials": {"id_in": []},
-                  "lines": {"id_in": []},
-                  "typologies": {"id_in": []},
-                  "designer": {"id_in": []}
-                }
+  var where = {"materials":[], "lines": [], "typologies":[], "designer": [] }
 
   const handlePageClick = (event) => {
-    getAllProductsThumbs(event.selected,productsQtd, where).then((x)=>{setCurrentItems(x)})
+    getAllProductsThumbs(event.selected,productsQtd, where).then((x)=>{ 
+      setCurrentItems(x.products);
+      productsCount = products.productsConnection.aggregate.count;
+    })
   };
 
 
   const handleFilterClick = (event) => {
     let item = event.target.offsetParent.attributes.getNamedItem("category")
-    if(item === null || item === 'undefined'){ console.error("O item enviado está vazio.", item)}
-    
+    if(item === null || item === 'undefined'){ console.error("O item enviado está vazio.", item) }
+
+    console.log(event.target.checked,event.target)
+
     switch(item.value){
       case "typology":
-        where.typologies.id_in.push(event.target.value)
+        if(event.target.checked){
+          where.typologies.push(event.target.value)
+          break;
+        }
+
+       where.typologies = where.typologies.filter((x) => {
+        return x !== event.target.value;
+        })
       break;
       case "material":
-        where.materials.id_in.push(event.target.value)
+        if(event.target.checked){
+          where.materials.push(event.target.value)
+          break;
+        }
+
+       where.materials = where.materials.filter((x) => {
+        return x !== event.target.value;
+        })
       break;
       case "line":
-        where.lines.id_in.push(event.target.value)
+        if(event.target.checked){
+          where.lines.push(event.target.value)
+          break;
+        }
+
+       where.lines = where.lines.filter((x) => {
+        return x !== event.target.value;
+        })
       break;
       case "designer":
-        where.designer.id_in.push(event.target.value)
+        if(event.target.checked){
+          where.designer.push(event.target.value)
+          break;
+        }
+
+       where.designer = where.designer.filter((x) => {
+        return x !== event.target.value;
+        })
       break;
       default:
       console.error("Não foi possível classificar.")
       break;
     }
-    getAllProductsThumbs(1,itemsPerPage, where).then((x)=>{setCurrentItems(x)})
-    console.log(JSON.stringify(where.materials.id_in))
-    console.log(JSON.stringify(where.lines.id_in))
-    console.log(JSON.stringify(where.typologies.id_in))
-    console.log(JSON.stringify(where.designer.id_in))
+
+    getAllProductsThumbs(0,itemsPerPage, where).then((x)=>{
+      setCurrentItems(x.products);
+      productsCount = products.productsConnection.aggregate.count;
+    })
   };
 
   return (
@@ -238,7 +265,7 @@ export default function Products({ products, productsCount, filters }) {
               <Box borderBottom="2px solid lightgray">
                 <List p="15px" hidden={showTypology}>
                   { filters.typologies.map((item, key) => (
-                      <ListItem key={key} py="3px">
+                      <ListItem key={key} py="3px" textTransform="capitalize">
                         <Checkbox mr="20px" mt="3px" category="typology" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
@@ -251,7 +278,7 @@ export default function Products({ products, productsCount, filters }) {
               <Box borderBottom="2px solid lightgray">
                 <List p="15px"  hidden={showMaterial}>
                   { filters.materials.map((item, key) => (
-                      <ListItem key={key} py="3px">
+                      <ListItem key={key} py="3px" textTransform="capitalize">
                         <Checkbox mr="20px" mt="3px" category="material" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
@@ -265,7 +292,7 @@ export default function Products({ products, productsCount, filters }) {
               <Box borderBottom="2px solid lightgray" maxHeight="300px" overflow="auto">
                 <List p="15px"  hidden={showCategory}>
                   { filters.lines.map((item, key) => (
-                      <ListItem key={key} py="3px">
+                      <ListItem key={key} py="3px" textTransform="capitalize">
                         <Checkbox mr="20px" mt="3px" category="line" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
@@ -279,7 +306,7 @@ export default function Products({ products, productsCount, filters }) {
               <Box borderBottom="2px solid lightgray" maxHeight="300px" overflow="auto">
                 <List p="15px"  hidden={showDesigners}>
                   { filters.designers.map((item, key) => (
-                      <ListItem key={key} title={item.name} textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden">
+                      <ListItem key={key} title={item.name} textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden" textTransform="capitalize">
                         <Checkbox mr="20px" mt="3px" category="designer" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
@@ -322,10 +349,10 @@ export default function Products({ products, productsCount, filters }) {
     );
 }
 
-var where = {"materials": {"id_in": []},
-                  "lines": {"id_in": []},
-                  "typologies": {"id_in": []},
-                  "designer": {"id_in": []}
+var where = {"materials":[],
+                  "lines": [],
+                  "typologies":[],
+                  "designer": []
                 };
 
 export const getStaticProps = async () => {
