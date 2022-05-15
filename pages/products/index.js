@@ -128,7 +128,6 @@ export default function Products({ products, productsCount, filters }) {
   const itemsPerPage = productsQtd
   const pageCount = productsCount / productsQtd
 
-
   // ========================================================
 
 
@@ -143,8 +142,43 @@ export default function Products({ products, productsCount, filters }) {
   useEffect(() => {
   }, []);
 
+  var where = {"materials": {"id_in": []},
+                  "lines": {"id_in": []},
+                  "typologies": {"id_in": []},
+                  "designer": {"id_in": []}
+                }
+
   const handlePageClick = (event) => {
-    getAllProductsThumbs(event.selected,productsQtd).then((x)=>{setCurrentItems(x)})
+    getAllProductsThumbs(event.selected,productsQtd, where).then((x)=>{setCurrentItems(x)})
+  };
+
+
+  const handleFilterClick = (event) => {
+    let item = event.target.offsetParent.attributes.getNamedItem("category")
+    if(item === null || item === 'undefined'){ console.error("O item enviado está vazio.", item)}
+    
+    switch(item.value){
+      case "typology":
+        where.typologies.id_in.push(event.target.value)
+      break;
+      case "material":
+        where.materials.id_in.push(event.target.value)
+      break;
+      case "line":
+        where.lines.id_in.push(event.target.value)
+      break;
+      case "designer":
+        where.designer.id_in.push(event.target.value)
+      break;
+      default:
+      console.error("Não foi possível classificar.")
+      break;
+    }
+    getAllProductsThumbs(1,itemsPerPage, where).then((x)=>{setCurrentItems(x)})
+    console.log(JSON.stringify(where.materials.id_in))
+    console.log(JSON.stringify(where.lines.id_in))
+    console.log(JSON.stringify(where.typologies.id_in))
+    console.log(JSON.stringify(where.designer.id_in))
   };
 
   return (
@@ -205,7 +239,7 @@ export default function Products({ products, productsCount, filters }) {
                 <List p="15px" hidden={showTypology}>
                   { filters.typologies.map((item, key) => (
                       <ListItem key={key} py="3px">
-                        <Checkbox mr="20px" mt="3px"></Checkbox>{item.name}
+                        <Checkbox mr="20px" mt="3px" category="typology" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
                   }
@@ -218,7 +252,7 @@ export default function Products({ products, productsCount, filters }) {
                 <List p="15px"  hidden={showMaterial}>
                   { filters.materials.map((item, key) => (
                       <ListItem key={key} py="3px">
-                        <Checkbox mr="20px" mt="3px"></Checkbox>{item.name}
+                        <Checkbox mr="20px" mt="3px" category="material" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
                   }
@@ -230,9 +264,9 @@ export default function Products({ products, productsCount, filters }) {
 
               <Box borderBottom="2px solid lightgray" maxHeight="300px" overflow="auto">
                 <List p="15px"  hidden={showCategory}>
-                  { filters.catalogos.map((item, key) => (
+                  { filters.lines.map((item, key) => (
                       <ListItem key={key} py="3px">
-                        <Checkbox mr="20px" mt="3px"></Checkbox>{item.name}
+                        <Checkbox mr="20px" mt="3px" category="line" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
                   }
@@ -246,7 +280,7 @@ export default function Products({ products, productsCount, filters }) {
                 <List p="15px"  hidden={showDesigners}>
                   { filters.designers.map((item, key) => (
                       <ListItem key={key} title={item.name} textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden">
-                        <Checkbox mr="20px" mt="3px"></Checkbox>{item.name}
+                        <Checkbox mr="20px" mt="3px" category="designer" onChange={handleFilterClick} value={item.id}></Checkbox>{item.name}
                       </ListItem>
                     ))
                   }
@@ -288,8 +322,14 @@ export default function Products({ products, productsCount, filters }) {
     );
 }
 
+var where = {"materials": {"id_in": []},
+                  "lines": {"id_in": []},
+                  "typologies": {"id_in": []},
+                  "designer": {"id_in": []}
+                };
+
 export const getStaticProps = async () => {
-  const products = await getAllProductsThumbs(0,productsQtd)
+  const products = await getAllProductsThumbs(0,productsQtd, where)
   const productsCount = await getAllProductsCount()
   const filters = await getAllFilters()
   return {

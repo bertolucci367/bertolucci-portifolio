@@ -2698,6 +2698,11 @@
   "resolved" "https://registry.npmjs.org/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz"
   "version" "1.0.1"
 
+"json-to-graphql-query@^2.2.4":
+  "integrity" "sha512-vNvsOKDSlEqYCzejI1xHS9Hm738dSnG4Upy09LUGqyybZXSIIb7NydDphB/6WxW2EEVpPU4JeU/Yo63Nw9dEJg=="
+  "resolved" "https://registry.npmjs.org/json-to-graphql-query/-/json-to-graphql-query-2.2.4.tgz"
+  "version" "2.2.4"
+
 "json2mq@^0.2.0":
   "integrity" "sha1-tje9O6nqvhIsg+lyBIOusQ0skEo="
   "resolved" "https://registry.npmjs.org/json2mq/-/json2mq-0.2.0.tgz"
