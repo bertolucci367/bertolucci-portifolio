@@ -110,11 +110,7 @@ export default function Contato({ sliderNossaHistoria }) {
             alignItems="center"
             justifyContent="center"
           >
-            <Heading
-              mb="10"
-              mt={isLargeThan700 && '-20'}
-              pt="0"
-            >
+            <Heading mb="10" mt={isLargeThan700 && '-20'} pt="0">
               Conheça a nossa fábrica
             </Heading>
             <Text mb="5">
@@ -138,7 +134,20 @@ export default function Contato({ sliderNossaHistoria }) {
           </Box>
         </Flex>
       </Flex>
-
+      <Flex flexDir="column" alignItems="center" justifyContent="center" p="30">
+        <Heading fontSize="3xl" textAlign="center" p="10">
+          Fábrica e Showroom
+        </Heading>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3658.1907936715015!2d-46.6986636!3d-23.5256392!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef871230a6f63%3A0x36843374e384d82a!2sBertolucci%20Ilumina%C3%A7%C3%A3o!5e0!3m2!1spt-BR!2sbr!4v1652625562879!5m2!1spt-BR!2sbr"
+          width="100%"
+          height="600"
+          style={{ border: 0 }}
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </Flex>
       <Footer />
     </Layout>
   );
