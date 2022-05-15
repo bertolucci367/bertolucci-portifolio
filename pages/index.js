@@ -49,7 +49,7 @@ export default function Home({
   instaFeed,
 }) {
   const [isLargeThan700] = useMediaQuery('(max-width:700px)');
-  console.log(instaFeed);
+ 
   return (
     <Layout>
       <BannerSliderHome sliders={slidersHome} dots isSlider arrows />

@@ -25,7 +25,7 @@ export default function Fabrica({ sliderFabrica }) {
     <Layout>
       <Banner height="800px" isSlider dots arrows>
         {sliderFabrica.map((items, index) => {
-          console.log(items);
+       
 
           return (
             <Box
@@ -77,7 +77,7 @@ export default function Fabrica({ sliderFabrica }) {
       <Box p="10" />
       <Banner height="800px" isSlider dots arrows>
         {sliderFabrica.map((items, index) => {
-          console.log(items);
+       
 
           return (
             <Box
