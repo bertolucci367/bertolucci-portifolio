@@ -111,33 +111,37 @@ export default function Footer() {
 
           <Stack align={isLargerThan600 ? 'center' : 'flex-start'}>
             <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
+
             <Link
               as="a"
-              href="/care_for_your_lamp"
+              href="/cuidados_para_sua_luminaria"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Cuidados com suas luminárias
             </Link>
+
             <Link
               as="a"
-              href="/visit_our_showroom"
+              href="/visite_nosso_showroom"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Visite nosso Showroom
             </Link>
+
             <Link
               as="a"
-              href="/terms_and_conditions_of_sale"
+              href="/termos_e_condicao_de_vale"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Termos e condições de venda
             </Link>
+
             <Link
               as="a"
-              href="/privacy_policy"
+              href="/politica_de_privacidade"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
@@ -167,9 +171,11 @@ export default function Footer() {
                 <FaVimeoV />
               </SocialButton>
             </Stack>
+
             <Link as="a" href="#">
               11 3874 2879
             </Link>
+
             <Link
               as="a"
               href="https://wa.me/5511945219938?text=Gostei%20dos%20produtos%2C%20podemos%20conversar%20%3F"
@@ -178,14 +184,16 @@ export default function Footer() {
             >
               11 9 4521 9938
             </Link>
+
             <Link
               as="a"
-              href="/terms_and_conditions_of_sale"
+              href="/termos_e_condicao_venda"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Termos e condições de venda
             </Link>
+
             <Link
               as="a"
               href="https://goo.gl/maps/rsbFTXUUgNtBuj8P9"

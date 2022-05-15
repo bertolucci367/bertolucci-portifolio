@@ -51,7 +51,7 @@ const Topbar = () => {
   const menuitems = [
     {
       title: 'Produtos',
-      url: '/products',
+      url: '/produtos',
     },
     {
       title: 'Designers',
@@ -59,7 +59,7 @@ const Topbar = () => {
     },
     {
       title: 'A fábrica',
-      url: '/factory',
+      url: '/fabrica',
     },
     {
       title: 'Persona',
@@ -71,7 +71,7 @@ const Topbar = () => {
     },
     {
       title: 'Contato',
-      url: '/contact',
+      url: '/contato',
     },
   ];
 
