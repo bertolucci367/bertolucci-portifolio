@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from 'react';
 
 import {
@@ -17,7 +18,7 @@ import {
 
 export const Form = () => {
   const [inputName, setInputName] = useState('');
-  const [inputEmail, setInputEmail] = useState('');
+
 
   const handleInputChange = (e) => setInputName(e.target.value);
 
@@ -27,7 +28,12 @@ export const Form = () => {
     <form>
       <FormControl isRequired isInvalid={isError} pb="30">
         <FormLabel htmlFor="first-name">Nome</FormLabel>
-        <Input id="first-name" placeholder="Nome" value={inputName} onChange={handleInputChange}/>
+        <Input
+          id="first-name"
+          placeholder="Nome"
+          value={inputName}
+          onChange={handleInputChange}
+        />
         {!isError ? (
           <FormHelperText>
             Digite seu nome para entrarmos em contat com você
