@@ -1,4 +1,5 @@
-import { Input } from '@chakra-ui/react'
+/* eslint-disable */
+import { Input } from '@chakra-ui/react';
 import {
   Box,
   Image,
@@ -21,22 +22,23 @@ import {
   Checkbox,
   Link,
   InputGroup,
-  InputRightElement
+  InputRightElement,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Layout from 'src/components/Templates/Layout';
 import { getProduct, getAllProducts } from 'src/lib/graphcms';
 import ItemProduto from 'src/components/ItemProduto';
 
 const Produto = ({ product }) => {
-  return ( 
-  <Layout>
-      <BreakCrumb/>
-      <ItemProduto product={product}/>
-  </Layout>);
-}
+  return (
+    <Layout>
+      <BreakCrumb />
+      <ItemProduto product={product} />
+    </Layout>
+  );
+};
 
-export default Produto
+export default Produto;
 
 export async function getStaticPaths() {
   const products = await getAllProducts()
@@ -51,26 +53,32 @@ export async function getStaticPaths() {
   const product = await getProduct(params)
   return {
     props: {
-      product
+      product,
     },
     revalidate: 10,
   };
 };
 
 const BreakCrumb = () => {
-  const pid = ""
-  const name = "trocar"
+  const pid = '';
+  const name = 'trocar';
   return (
-    <Box flex='1' mt='85px'>
+    <Box flex="1" mt="85px">
       <Flex>
-        <Box flex='1' p="15px">
-          <Link as="a" d="inline" href="/">Bertolucci</Link>
+        <Box flex="1" p="15px">
+          <Link as="a" d="inline" href="/">
+            Bertolucci
+          </Link>
           <Text d="inline"> | </Text>
-          <Link as="a" d="inline" href="/produtos" >Produtos</Link>
+          <Link as="a" d="inline" href="/produtos">
+            Produtos
+          </Link>
           <Text d="inline"> | </Text>
-          <Link as="a" d="inline" href={ "/produtos/" + pid }>{ name }</Link>
+          <Link as="a" d="inline" href={'/produtos/' + pid}>
+            {name}
+          </Link>
         </Box>
       </Flex>
-    </Box>);
-}
-
+    </Box>
+  );
+};
