@@ -24,7 +24,7 @@ import {
   InputRightElement
 } from '@chakra-ui/react';
 import { HamburgerIcon,  AddIcon, MinusIcon, Search2Icon } from '@chakra-ui/icons'
-import Layout from 'src/components/Layout';
+import Layout from 'src/components/Templates/Layout';
 import NextLink from "next/link"
 import { getAllProductsThumbs, getAllProductsCount, getAllFilters } from 'src/lib/graphcms';
 import React, { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ import ReactPaginate from 'react-paginate';
 
 // ==============================================
 
-const itemsPerPage = 42
+const itemsPerPage = 60
 var pageCount = 0
 
 var where = {"materials":[], "lines": [], "typologies":[], "designer": [], "contains": "", orderBy: 'name_ASC' }
@@ -165,13 +165,9 @@ export default function Products({ products, filters }) {
         <Box flex='1' mt='85px'>
           <Flex>
             <Box flex='1' p="15px">
-              <NextLink href="/" passHref>
-              <Link d="inline">Bertolucci</Link>
-              </NextLink>
+              <Link as="a" d="inline" href="/">Bertolucci</Link>
               <Text d="inline"> | </Text>
-              <NextLink href="/produtos" passHref>
-              <Link d="inline">Produtos</Link>
-              </NextLink>
+              <Link as="a" d="inline" href="/produtos" >Produtos</Link>
             </Box>
             <Spacer/>
             <Box flex='1' py={2}>
@@ -323,17 +319,19 @@ function Items({ currentItems }) {
     <>
     {currentItems &&
       currentItems.map((item,key) => (
-        <Box flex="30%" maxWidth="30%" m="10px" key={key}>
-          <Center flex="1">
-            <Box flex="1" bg="lightgray"
-              border="1px solid dashed">
-              <Image src={item.photo[0].url} w="100%"/>
-            </Box>
-          </Center>
-          <Center flex="1" mt="10px">
-            <Text fontSize="20px" textTransform="capitalize">{ item.name }</Text>
-          </Center>
-        </Box>
+          <Box flex="15%" maxWidth="15%" m="10px" cursor="pointer" key={key}>
+            <Link as="a" href={`/produtos/${item.id}`}>
+            <Center flex="1">
+              <Box flex="1" bg="lightgray"
+                border="1px solid dashed">
+                <Image src={item.photo[0].url} w="100%"/>
+              </Box>
+            </Center>
+            <Center flex="1" mt="10px">
+              <Text fontSize="20px" textTransform="capitalize" __hover={{textDecoration: "underline"}}>{ item.name }</Text>
+            </Center>
+            </Link>
+          </Box>
       ))}
       </>
   )
