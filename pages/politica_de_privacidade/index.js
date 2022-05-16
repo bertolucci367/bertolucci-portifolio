@@ -56,7 +56,6 @@ export default function PoliticaPrivacidade() {
           informações pessoais, entre em contacto conosco.
         </Text>
         <Link
-          as="a"
           href="/politica_cookies"
           target="_blank"
           referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
