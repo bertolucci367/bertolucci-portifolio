@@ -169,7 +169,7 @@ export default function Products({ products, filters }) {
               <Link d="inline">Bertolucci</Link>
               </NextLink>
               <Text d="inline"> | </Text>
-              <NextLink href="/products" passHref>
+              <NextLink href="/produtos" passHref>
               <Link d="inline">Produtos</Link>
               </NextLink>
             </Box>
