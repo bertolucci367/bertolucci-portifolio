@@ -216,7 +216,6 @@ export default function Products({ products, filters }) {
                   <option value='name_ASC'>ordem alfabética a - z</option>
                   <option value='name_DESC'>ordem alfabética z - a</option>
                   <option value=''>mais vistos</option>
-
               </Select>
             </Stack>
           </Box>
@@ -440,5 +439,4 @@ function Items({ currentItems }) {
       ))}
       </>
   )
-
 }
