@@ -32,6 +32,7 @@ import {
 import React, { useEffect, useState } from 'react';
 
 import ReactPaginate from 'react-paginate';
+import Footer from 'src/components/Templates/Footer';
 
 // ==============================================
 
@@ -405,6 +406,7 @@ export default function Products({ products, filters }) {
           </Box>
         </Flex>
       </Box>
+      <Footer />
     </Layout>
   );
 }
