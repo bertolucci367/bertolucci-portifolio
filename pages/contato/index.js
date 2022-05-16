@@ -13,6 +13,7 @@ import {
   Divider,
 } from '@chakra-ui/react';
 
+
 //Components
 import Layout from 'src/components/Templates/Layout';
 
@@ -22,10 +23,12 @@ import Banner from 'src/components/AllBannersSliders/Structural/Banner';
 
 //Libs
 import { getSliderOurHistory } from 'src/lib/graphcms';
-import { Form } from 'src/components/Form';
+import { Form2 } from 'src/components/Form';
 
 export default function Contato({ sliderNossaHistoria }) {
   const [isLargeThan700] = useMediaQuery('(max-width:700px)');
+
+  
 
   return (
     <Layout corFundo="white">
@@ -130,7 +133,7 @@ export default function Contato({ sliderNossaHistoria }) {
             </Text>
           </Box>
           <Box w={isLargeThan700 ? '100%' : '90%'} p="50">
-            <Form />
+            <Form2 />
           </Box>
         </Flex>
       </Flex>
