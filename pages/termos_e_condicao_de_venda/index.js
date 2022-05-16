@@ -8,7 +8,7 @@ import Footer from 'src/components/Templates/Footer';
 import { Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react';
 import Link from 'next/link';
 
-export default function PoliticaPrivacidade() {
+export default function PoliticaVendas() {
   const [isLargeThan600] = useMediaQuery('(max-width:600px)');
 
   return (

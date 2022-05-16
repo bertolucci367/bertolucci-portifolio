@@ -111,7 +111,6 @@ export default function Footer() {
 
           <Stack align={isLargerThan600 ? 'center' : 'flex-start'}>
             <ListHeader>Fique por dentro das nossas novidades!</ListHeader>
-
             <Link
               as="a"
               href="/cuidados_para_sua_luminaria"
@@ -120,25 +119,22 @@ export default function Footer() {
             >
               Cuidados com suas luminárias
             </Link>
-
-            <Link
+            {/*  <Link
               as="a"
               href="/visite_nosso_showroom"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Visite nosso Showroom
-            </Link>
-
+            </Link> */}
             <Link
               as="a"
-              href="/termos_e_condicao_de_vale"
+              href="/termos_e_condicao_de_venda"
               target="_blank"
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               Termos e condições de venda
             </Link>
-
             <Link
               as="a"
               href="/politica_de_privacidade"
@@ -167,7 +163,7 @@ export default function Footer() {
               <SocialButton label="Pinterest" href="">
                 <FaPinterest />
               </SocialButton>
-              <SocialButton label="Pinterest" href="">
+              <SocialButton label="Vimeo" href="">
                 <FaVimeoV />
               </SocialButton>
             </Stack>
@@ -183,15 +179,6 @@ export default function Footer() {
               referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
             >
               11 9 4521 9938
-            </Link>
-
-            <Link
-              as="a"
-              href="/termos_e_condicao_venda"
-              target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
-            >
-              Termos e condições de venda
             </Link>
 
             <Link
