@@ -25,7 +25,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router'
 import Layout from 'src/components/Templates/Layout';
-import { getProduct } from 'src/lib/graphcms';
+import { getProduct, getAllProducts } from 'src/lib/graphcms';
 import ItemProduto from 'src/components/ItemProduto';
 
 const Produto = ({ product }) => {
@@ -39,16 +39,15 @@ const Produto = ({ product }) => {
 export default Produto
 
 export async function getStaticPaths() {
+  const products = await getAllProducts()
+  const paths = products.map((s) => ( { params : { pid : s.id } } ))
   return {
-    paths: [
-      '/produtos/[pid]',
-      { params: { pid: 'second-post' } },
-    ],
-    fallback: true,
+    paths: paths,
+    fallback: false,
   }
 }
 
-export const getStaticProps = async ( { params } ) => {
+ export const getStaticProps = async ( { params } ) => {
   const product = await getProduct(params)
   return {
     props: {
