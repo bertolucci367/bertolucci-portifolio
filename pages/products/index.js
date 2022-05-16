@@ -36,7 +36,7 @@ import ReactPaginate from 'react-paginate';
 const itemsPerPage = 42
 var pageCount = 0
 
-var where = {"materials":[], "lines": [], "typologies":[], "designer": [] }
+var where = {"materials":[], "lines": [], "typologies":[], "designer": [], "contains": "", orderBy: 'name_ASC' }
 
 export default function Products({ products, filters }) {
   
@@ -48,6 +48,8 @@ export default function Products({ products, filters }) {
   const [ showCategory, setShowCategory ] = useState(false);
   const [ showDesigners, setShowDesigners ] = useState(false);
   const [pageCount, setPageCount] = useState(0);
+  var typingTimer;
+  const doneTypingInterval = 1000;
 
   // ========================================================
 
@@ -74,7 +76,6 @@ export default function Products({ products, filters }) {
       console.log(data)
     })
   };
-
 
   const handleFilterClick = (event) => {
     let item = event.target.offsetParent.attributes.getNamedItem("category")
@@ -133,8 +134,30 @@ export default function Products({ products, filters }) {
     })
   };
 
-  const handleSearch = (event) => {
-    console.log(event)
+  const handleSearchKeyUp = (event) => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(()=>{doneTyping(event)}, doneTypingInterval);
+  }
+
+  const handleSearchKeyDown = (event) => {
+    clearTimeout(typingTimer);
+  }
+
+  const doneTyping = (x) => {
+    console.log("Terminado de digitar", x)
+    where.contains = x.target.value;
+    getAllProductsThumbs(0, itemsPerPage, where).then((data)=>{
+      setCurrentItems(data.products);
+      setPageCount(Math.ceil(data.productsConnection.aggregate.count / itemsPerPage));
+    })
+  }
+
+  const handleOrdenation = (event) => {
+    where.orderBy = event.target.value;
+    getAllProductsThumbs(0, itemsPerPage, where).then((data)=>{
+      setCurrentItems(data.products);
+      setPageCount(Math.ceil(data.productsConnection.aggregate.count / itemsPerPage));
+    })
   }
 
   return (
@@ -159,19 +182,20 @@ export default function Products({ products, filters }) {
                   />
                   <Input placeholder="Digite o que busca" border="2px solid black" 
                   _placeholder={{ opacity: 1, color: 'gray.500' }}
-                  onKeyUp={handleSearch}
+                  onKeyUp={handleSearchKeyUp}
+                  onKeyDown={handleSearchKeyDown}
                   color='teal'/>  
                 </InputGroup>
             </Box>
             <Spacer/>
             <Box flex='1' py={2}>
               <Stack spacing={3}>
-              <Select placeholder='Ordenar Por:'>
-                  <option value='option1'>mais novos</option>
-                  <option value='option2'>mais antigos</option>
-                  <option value='option3'>ordem alfabética a - z</option>
-                  <option value='option4'>ordem alfabética z - a</option>
-                  <option value='option5'>mais vistos</option>
+              <Select placeholder='Ordenar Por:' onChange={handleOrdenation}>
+                  <option value='publishedAt_DESC'>mais novos</option>
+                  <option value='publishedAt_ASC'>mais antigos</option>
+                  <option value='name_ASC'>ordem alfabética a - z</option>
+                  <option value='name_DESC'>ordem alfabética z - a</option>
+                  <option value=''>mais vistos</option>
               </Select>
             </Stack>
             </Box>
