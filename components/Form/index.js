@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { useState } from 'react';
-
+import { useRouter } from 'next/router';
 import {
   FormControl,
   FormLabel,
@@ -14,75 +14,161 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Button,
 } from '@chakra-ui/react';
 
-export const Form = () => {
-  const [inputName, setInputName] = useState('');
+import InputMask from 'react-input-mask';
 
+import { Formik, Field, Form } from 'formik';
 
-  const handleInputChange = (e) => setInputName(e.target.value);
+export const Form2 = () => {
+  const [phone, setPhone] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [rg, setRG] = useState('');
+  const [id, setId] = useState('');
 
-  const isError = inputName === '';
+  const router = useRouter();
+
+  const onSubmit = async (values, setFieldValue) => {
+    try {
+      console.log(values);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onBlurCep = (ev, handleChange) => {
+    const { value } = ev.target;
+
+    const cep = value?.replace(/[^0-9]/g, '');
+
+    if (cep?.length !== 8) {
+      return;
+    }
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        handleChange('address', data.logradouro);
+
+        handleChange('city', data.localidade);
+      });
+  };
 
   return (
-    <form>
-      <FormControl isRequired isInvalid={isError} pb="30">
-        <FormLabel htmlFor="first-name">Nome</FormLabel>
-        <Input
-          id="first-name"
-          placeholder="Nome"
-          value={inputName}
-          onChange={handleInputChange}
-        />
-        {!isError ? (
-          <FormHelperText>
-            Digite seu nome para entrarmos em contat com você
-          </FormHelperText>
-        ) : (
-          <FormErrorMessage>Nome é obrigatório.</FormErrorMessage>
-        )}
-      </FormControl>
-      <FormControl isRequired isInvalid={isError} pb="30">
-        <FormLabel htmlFor="email">Email</FormLabel>
-        <Input
-          id="email"
-          type="email"
-          value={inputName}
-          onChange={handleInputChange}
-        />
-        {!isError ? (
-          <FormHelperText>
-            Digite seu Email para entrarmos em contato com você
-          </FormHelperText>
-        ) : (
-          <FormErrorMessage>Email é obrigatório.</FormErrorMessage>
-        )}
-      </FormControl>
-      <Flex>
-        <FormControl>
+    <Formik
+      onSubmit={onSubmit}
+      validateOnMount
+      initialValues={{
+        cep: '',
+        logradouro: '',
+        numero: '',
+        cidade: '',
+      }}
+      render={({ values, setFieldValue }) => (
+        <Form style={{ display: 'flex', flexDirection: 'column' }}>
+          <Flex flexDir="column" w="full">
+            <FormControl py="2">
+              <Field name="idDoctor" type="text" style={{ display: 'none' }} />
+              <label>Nome</label>
+              <Input name="name" type="text" />
+            </FormControl>
+            <FormControl py="2">
+              <label>Sexo</label>
+              <Input name="sex" type="text" />
+            </FormControl>
+            <FormControl py="2">
+              <label>Idade</label>
+              <NumberInput defaultValue={0} min={0} max={100}>
+                <NumberInputField name="age" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+          </Flex>
           <Box>
-            <FormLabel htmlFor="ddd">DDD</FormLabel>
-            <NumberInput max={99} min={11}>
-              <NumberInputField id="ddd" value="11" />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
+            <FormControl py="2">
+              <label>CPF</label>
+              <Input
+                as={InputMask}
+                mask="999.999.999-99"
+                name="cpf"
+                type="text"
+                value={cpf}
+                onChange={(e) => setCPF(e.target.value)}
+              />
+            </FormControl>
+            <FormControl py="2">
+              <label>RG</label>
+              <Input
+                as={InputMask}
+                mask="99.999.999-9"
+                name="rg"
+                type="text"
+                value={rg}
+                onChange={(e) => setRG(e.target.value)}
+              />
+            </FormControl>
+            <FormControl py="2">
+              <label>Telefone</label>
+
+              <Input
+                as={InputMask}
+                mask="(99)99999-9999"
+                name="phone"
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </FormControl>
           </Box>
-        </FormControl>
-        <FormControl isRequired isInvalid={isError}>
-          <FormLabel htmlFor="telefone">Telefone</FormLabel>
-          <Input id="telefone" type="tel" placeholder="Telefone" />
-          {!isError ? (
-            <FormHelperText>
-              Enter the email you'd like to receive the newsletter on.
-            </FormHelperText>
-          ) : (
-            <FormErrorMessage>Email is required.</FormErrorMessage>
-          )}
-        </FormControl>
-      </Flex>
-    </form>
+
+          <Box>
+            <FormControl py="2">
+              <label>Cep</label>
+              <Input
+                name="cep"
+                type="text"
+                onBlur={(ev) => onBlurCep(ev, setFieldValue)}
+              />
+            </FormControl>
+            <FormControl py="2">
+              <label>Cidade</label>
+              <Input name="city" value={values.city} type="text" />
+            </FormControl>
+            <FormControl py="2">
+              <label>Endereço</label>
+              <Input name="address" value={values.address} type="text" />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl py="2">
+              <label>Número</label>
+              <Input name="number" type="number" />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl py="2">
+              <Button
+                type="submit"
+                border="1px solid green.300"
+                color="green.300"
+                bg="transparent"
+                transition="all 1.3 ease"
+                _hover={{
+                  bgColor: 'green.300',
+                  color: 'white',
+                  border: 'none',
+                }}
+              >
+                Cadastrar
+              </Button>
+            </FormControl>
+          </Box>
+        </Form>
+      )}
+    />
   );
 };

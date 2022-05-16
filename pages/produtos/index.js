@@ -21,14 +21,12 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
-import { AddIcon, MinusIcon, Search2Icon } from '@chakra-ui/icons';
+
+import { HamburgerIcon,  AddIcon, MinusIcon, Search2Icon } from '@chakra-ui/icons'
 import Layout from 'src/components/Templates/Layout';
-import NextLink from 'next/link';
-import {
-  getAllProductsThumbs,
-  getAllProductsCount,
-  getAllFilters,
-} from 'src/lib/graphcms';
+import NextLink from "next/link"
+import { getAllProductsThumbs, getAllProductsCount, getAllFilters } from 'src/lib/graphcms';
+
 import React, { useEffect, useState } from 'react';
 
 import ReactPaginate from 'react-paginate';
@@ -36,8 +34,10 @@ import Footer from 'src/components/Templates/Footer';
 
 // ==============================================
 
+
 const itemsPerPage = 60
 var pageCount = 0
+
 
 var where = {
   materials: [],
@@ -186,43 +186,36 @@ export default function Products({ products, filters }) {
 
   return (
     <Layout>
-      <Box flex="1" mt="85px">
-        <Flex>
-          <Box flex="1" p="15px">
-            <NextLink href="/" passHref>
-              <Link d="inline">Bertolucci</Link>
-            </NextLink>
-            <Text d="inline"> | </Text>
-            <NextLink href="/produtos" passHref>
-              <Link d="inline">Produtos</Link>
-            </NextLink>
-          </Box>
-          <Spacer />
-          <Box flex="1" py={2}>
-            <InputGroup>
-              <InputRightElement
-                pointerEvents="none"
-                children={<Search2Icon color="gray.500" />}
-              />
-              <Input
-                placeholder="Digite o que busca"
-                border="2px solid black"
-                _placeholder={{ opacity: 1, color: 'gray.500' }}
-                onKeyUp={handleSearchKeyUp}
-                onKeyDown={handleSearchKeyDown}
-                color="teal"
-              />
-            </InputGroup>
-          </Box>
-          <Spacer />
-          <Box flex="1" py={2}>
-            <Stack spacing={3}>
-              <Select placeholder="Ordenar Por:" onChange={handleOrdenation}>
-                <option value="publishedAt_DESC">mais novos</option>
-                <option value="publishedAt_ASC">mais antigos</option>
-                <option value="name_ASC">ordem alfabética a - z</option>
-                <option value="name_DESC">ordem alfabética z - a</option>
-                <option value="">mais vistos</option>
+        <Box flex='1' mt='85px'>
+          <Flex>
+            <Box flex='1' p="15px">
+              <Link as="a" d="inline" href="/">Bertolucci</Link>
+              <Text d="inline"> | </Text>
+              <Link as="a" d="inline" href="/produtos" >Produtos</Link>
+            </Box>
+            <Spacer/>
+            <Box flex='1' py={2}>
+                <InputGroup>
+                  <InputRightElement
+                    pointerEvents='none'
+                    children={<Search2Icon color='gray.500' />}
+                  />
+                  <Input placeholder="Digite o que busca" border="2px solid black" 
+                  _placeholder={{ opacity: 1, color: 'gray.500' }}
+                  onKeyUp={handleSearchKeyUp}
+                  onKeyDown={handleSearchKeyDown}
+                  color='teal'/>  
+                </InputGroup>
+            </Box>
+            <Spacer/>
+            <Box flex='1' py={2}>
+              <Stack spacing={3}>
+              <Select placeholder='Ordenar Por:' onChange={handleOrdenation}>
+                  <option value='publishedAt_DESC'>mais novos</option>
+                  <option value='publishedAt_ASC'>mais antigos</option>
+                  <option value='name_ASC'>ordem alfabética a - z</option>
+                  <option value='name_DESC'>ordem alfabética z - a</option>
+                  <option value=''>mais vistos</option>
               </Select>
             </Stack>
           </Box>
