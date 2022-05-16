@@ -6,6 +6,7 @@ import Footer from 'src/components/Templates/Footer';
 
 //Chakra UI
 import { Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react';
+import Link from 'next/link';
 
 export default function PoliticaPrivacidade() {
   const [isLargeThan600] = useMediaQuery('(max-width:600px)');
@@ -19,7 +20,7 @@ export default function PoliticaPrivacidade() {
         <Heading mb="10" fontSize="xl" textAlign="center">
           A sua privacidade é importante para nós.
         </Heading>
-        <Text mb="10" fontSize="medium" >
+        <Text mb="10" fontSize="medium">
           É política do Bertolucci respeitar a sua privacidade em relação a
           qualquer informação sua que possamos coletar no site da Bertolucci e
           outras mídias que possuímos e operamos.
@@ -54,11 +55,24 @@ export default function PoliticaPrivacidade() {
           você tiver alguma dúvida sobre como lidamos com dados do usuário e
           informações pessoais, entre em contacto conosco.
         </Text>
-        <Heading mb="10" fontSize="xl" textAlign="center">
-          Cookies
-        </Heading>
+        <Link
+          href="/politica_cookies"
+          target="_blank"
+          referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+        >
+          <Heading mb="10" fontSize="xl" textAlign="center">
+            Cookies
+          </Heading>
+        </Link>
         <Text mb="10" fontSize="medium">
-          Veja mais na seção de política de cookies.
+          <Link
+            as="a"
+            href="/politica_cookies"
+            target="_blank"
+            referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+          >
+            Veja mais na seção de política de cookies.
+          </Link>
         </Text>
         <Heading mb="10" fontSize="xl" textAlign="center">
           Mais informações{' '}
