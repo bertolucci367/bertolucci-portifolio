@@ -28,35 +28,42 @@ import { useRouter } from 'next/router';
 import Layout from 'src/components/Templates/Layout';
 import { getProduct, getAllProducts } from 'src/lib/graphcms';
 import ItemProduto from 'src/components/ItemProduto';
+import React, { useEffect, useState } from 'react';
 
-const Produto = ({ product }) => {
+const Produto = () => {
+  const router = useRouter();
+  const query = router.query;
+  const [ product, setProduct ] = useState(null)
+  const pid = query.pid;
+
+  if(!pid){  return ""; }
+
+ if(!product) { getProduct(pid).then(x => setProduct(x))}
+
+  console.log(product)
+
   return (
     <Layout>
       <BreakCrumb />
+      <Box>
+        <Flex flex="30%" b="lightgray">
+          <Text fontSize="4xl">{ product?.name}</Text>
+          <Text textTransform="capitalize" fontSize="2xl">
+            { product?.designer?.name}
+          </Text>
+          <Text>{product?.history}</Text>
+        </Flex>
+        <Flex flex="1" b="lightblue">
+          <Text>Ficha Tecnica</Text>
+          <Text>Descrição</Text>
+          <Text>{product?.description?.text}</Text>
+        </Flex>
+    </Box>
     </Layout>
   );
 };
 
 export default Produto;
-
-export async function getStaticPaths() {
-  const products = await getAllProducts()
-  const paths = products.map((s) => ( { params : { pid : s.id } } ))
-  return {
-    paths: paths,
-    fallback: false,
-  }
-}
-
- export const getStaticProps = async ( { params } ) => {
-  const product = await getProduct(params)
-  return {
-    props: {
-      product,
-    },
-    revalidate: 10,
-  };
-};
 
 const BreakCrumb = () => {
   const pid = '';
