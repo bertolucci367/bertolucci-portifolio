@@ -33,7 +33,6 @@ const Produto = ({ product }) => {
   return (
     <Layout>
       <BreakCrumb />
-      <ItemProduto product={product} />
     </Layout>
   );
 };
