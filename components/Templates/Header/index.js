@@ -92,7 +92,7 @@ const Topbar = () => {
         cursor="pointer"
       >
         <Link href="/">
-          <Image src="images/logo/index.png" w="50" h="50" />
+          <Image src="/images/logo/index.png" w="50" h="50" />
         </Link>
       </Flex>
 
