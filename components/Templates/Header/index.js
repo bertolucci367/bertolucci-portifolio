@@ -10,9 +10,11 @@ import {
   Button,
   MenuList,
   MenuItem,
+  useMediaQuery,
+  IconButton,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { MoonIcon, SunIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 import { AiOutlineGooglePlus } from 'react-icons/ai';
 import { FiUser } from 'react-icons/fi';
@@ -20,6 +22,8 @@ import useAuth from 'src/hooks/useAuth';
 
 const Topbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const [isLargeThan768] = useMediaQuery('(max-width:768px)');
 
   const bgColor = useColorModeValue('#ffff', '#1A202C');
 
@@ -47,27 +51,27 @@ const Topbar = () => {
   const menuitems = [
     {
       title: 'Produtos',
-      url: '/products',
+      url: '/produtos',
     },
     {
       title: 'Designers',
-      url: '',
+      url: '/designers',
     },
     {
       title: 'A fábrica',
-      url: '',
+      url: '/fabrica',
     },
     {
       title: 'Persona',
-      url: '',
+      url: '/persona',
     },
     {
       title: 'Giornale',
-      url: '',
+      url: '/giornale',
     },
     {
       title: 'Contato',
-      url: '',
+      url: '/contato',
     },
   ];
 
@@ -81,8 +85,15 @@ const Topbar = () => {
       direction="column"
       zIndex={99999}
     >
-      <Flex alignItems="center" justifyContent="center" p="10px">
-        <Image src="images/logo/index.png" w="50" h="50" />
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        p="10px"
+        cursor="pointer"
+      >
+        <Link href="/">
+          <Image src="images/logo/index.png" w="50" h="50" />
+        </Link>
       </Flex>
 
       <Flex
@@ -93,29 +104,62 @@ const Topbar = () => {
         w="50%"
         h="80px"
         px={[4, 8]}
+        flexDir={isLargeThan768 ? 'row-reverse' : 'row'}
       >
-        <Flex alignItems="center" justifyContent="center" w="100%">
+        {isLargeThan768 ? (
           <Menu>
-            {menuitems.map((items, index) => (
-              <Button
-                as={Button}
-                key={index}
-                bg="transparent"
-                fontWeight="500"
-                transition="all 0.2s"
-                _hover={{
-                  backgroundColor: 'transparent',
-                  textDecoration: 'underline',
-                  fontWeight: 700,
-                }}
-                _expanded={{ backgroundColor: 'transparent' }}
-                _active={{ bg: 'transparent', boxShadow: 'none' }}
-              >
-                <Link href={items.url}>{items.title}</Link>
-              </Button>
-            ))}
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<HamburgerIcon />}
+              variant="outline"
+            />
+            <MenuList>
+              {menuitems.map((items, index) => (
+                <MenuItem
+                  as={Button}
+                  key={index}
+                  bg="transparent"
+                  fontWeight="500"
+                  transition="all 0.2s"
+                  _hover={{
+                    backgroundColor: 'transparent',
+                    textDecoration: 'underline',
+                    fontWeight: 700,
+                  }}
+                  _expanded={{ backgroundColor: 'transparent' }}
+                  _active={{ bg: 'transparent', boxShadow: 'none' }}
+                >
+                  <a href={`${items.url}`}>{items.title}</a>
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
-        </Flex>
+        ) : (
+          <Flex alignItems="center" justifyContent="center" w="100%">
+            <Menu>
+              {menuitems.map((items, index) => (
+                <Button
+                  as={Button}
+                  key={index}
+                  bg="transparent"
+                  fontWeight="500"
+                  transition="all 0.2s"
+                  _hover={{
+                    backgroundColor: 'transparent',
+                    textDecoration: 'underline',
+                    fontWeight: 700,
+                  }}
+                  _expanded={{ backgroundColor: 'transparent' }}
+                  _active={{ bg: 'transparent', boxShadow: 'none' }}
+                >
+                  <a href={`${items.url}`}>{items.title}</a>
+                </Button>
+              ))}
+            </Menu>
+          </Flex>
+        )}
+
         <Flex>
           {user ? (
             <Flex p="20px">

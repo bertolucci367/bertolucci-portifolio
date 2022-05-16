@@ -3,8 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['www.datocms-assets.com','media.graphassets.com']
-  }
-}
+    domains: [
+      'www.datocms-assets.com',
+      'media.graphassets.com',
+      'graph.instagram.com',
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
