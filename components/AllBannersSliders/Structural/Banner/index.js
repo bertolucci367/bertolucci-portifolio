@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
 
+import { useMediaQuery } from 'src/components/useMediaQuery';
+
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 import Slider from 'react-slick';
@@ -28,10 +30,12 @@ export default function Banner({
     slidesToScroll: 1,
   };
 
+  const isLargeThan700 = useMediaQuery('(max-width:767px)');
+
   const [slider, setSlider] = useState(null);
 
-  const top = useBreakpointValue({ base: '30%', md: '60%' });
-  const side = useBreakpointValue({ base: '1%', md: '40px' });
+  const top = useBreakpointValue({ base: '50%', md: '50%' });
+  const side = useBreakpointValue({ base: '1%', md: '50px' });
 
   return (
     <Box
@@ -39,6 +43,7 @@ export default function Banner({
       height={height ? height : '700px'}
       width="full"
       overflow="hidden"
+      maxH={isLargeThan700 ? '421px' : '700px'}
     >
       {isSlider && (
         <>

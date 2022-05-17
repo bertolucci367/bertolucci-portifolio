@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import {
   FormControl,
@@ -26,7 +26,9 @@ export const Form2 = () => {
   const [cpf, setCPF] = useState('');
   const [rg, setRG] = useState('');
   const [id, setId] = useState('');
-
+  const refPhoneNumber = useRef(null);
+  const refCPFNumber = useRef(null);
+  const refRGNumber = useRef(null);
   const router = useRouter();
 
   const onSubmit = async (values, setFieldValue) => {
@@ -70,7 +72,7 @@ export const Form2 = () => {
           <Flex flexDir="column" w="full">
             <FormControl py="2">
               <Field name="idDoctor" type="text" style={{ display: 'none' }} />
-              <label>Nome</label>
+              <label>Nome Completo</label>
               <Input name="name" type="text" />
             </FormControl>
             <FormControl py="2">
@@ -98,6 +100,7 @@ export const Form2 = () => {
                 type="text"
                 value={cpf}
                 onChange={(e) => setCPF(e.target.value)}
+                ref={refCPFNumber.current}
               />
             </FormControl>
             <FormControl py="2">
@@ -109,6 +112,7 @@ export const Form2 = () => {
                 type="text"
                 value={rg}
                 onChange={(e) => setRG(e.target.value)}
+                ref={refRGNumber.current}
               />
             </FormControl>
             <FormControl py="2">
@@ -121,6 +125,7 @@ export const Form2 = () => {
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                ref={refPhoneNumber.current}
               />
             </FormControl>
           </Box>

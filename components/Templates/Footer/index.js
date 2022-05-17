@@ -40,7 +40,7 @@ const SocialButton = ({ children, label, href }) => {
       cursor="pointer"
       as="a"
       target="_blank"
-      referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+      referrerPolicy="no-referrer-when-downgrade"
       href={href}
       display="inline-flex"
       alignItems="center"
@@ -65,7 +65,7 @@ const ListHeader = ({ children }) => {
 };
 
 export default function Footer() {
-  const [isLargerThan600] = useMediaQuery('(max-width:600px)');
+  const isLargerThan600 = useMediaQuery('(max-width:600px)');
 
   return (
     <Box
@@ -115,7 +115,7 @@ export default function Footer() {
               as="a"
               href="/cuidados_para_sua_luminaria"
               target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              referrerPolicy="no-referrer-when-downgrade"
             >
               Cuidados com suas luminárias
             </Link>
@@ -131,7 +131,7 @@ export default function Footer() {
               as="a"
               href="/termos_e_condicao_de_venda"
               target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              referrerPolicy="no-referrer-when-downgrade"
             >
               Termos e condições de venda
             </Link>
@@ -139,7 +139,7 @@ export default function Footer() {
               as="a"
               href="/politica_de_privacidade"
               target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              referrerPolicy="no-referrer-when-downgrade"
             >
               Política de Privacidade
             </Link>
@@ -160,7 +160,12 @@ export default function Footer() {
               >
                 <FaInstagram />
               </SocialButton>
-              <SocialButton label="Pinterest" href="">
+              <SocialButton
+                label="Pinterest"
+                href="https://br.pinterest.com/bertolucci1956"
+                target="_blank"
+                referrerPolicy="no-referrer-when-downgrade"
+              >
                 <FaPinterest />
               </SocialButton>
               <SocialButton label="Vimeo" href="">
@@ -176,7 +181,7 @@ export default function Footer() {
               as="a"
               href="https://wa.me/5511945219938?text=Gostei%20dos%20produtos%2C%20podemos%20conversar%20%3F"
               target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              referrerPolicy="no-referrer-when-downgrade"
             >
               11 9 4521 9938
             </Link>
@@ -185,7 +190,7 @@ export default function Footer() {
               as="a"
               href="https://goo.gl/maps/rsbFTXUUgNtBuj8P9"
               target="_blank"
-              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              referrerPolicy="no-referrer-when-downgrade"
             >
               Rua Espártaco, 367 | Lapa | São Paulo | SP
             </Link>

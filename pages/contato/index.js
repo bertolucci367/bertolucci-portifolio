@@ -1,19 +1,8 @@
 /* eslint-disable */
-
 //External libs
-
+import { Box, Text, Flex, Heading, Button, Divider } from '@chakra-ui/react';
 //Chakra UI
-import {
-  Box,
-  Text,
-  Flex,
-  Heading,
-  useMediaQuery,
-  Button,
-  Divider,
-} from '@chakra-ui/react';
-
-
+import { useMediaQuery } from 'src/components/useMediaQuery';
 //Components
 import Layout from 'src/components/Templates/Layout';
 
@@ -23,79 +12,73 @@ import Banner from 'src/components/AllBannersSliders/Structural/Banner';
 
 //Libs
 import { getSliderOurHistory } from 'src/lib/graphcms';
+
 import { Form2 } from 'src/components/Form';
 
 export default function Contato({ sliderNossaHistoria }) {
-  const [isLargeThan700] = useMediaQuery('(max-width:700px)');
-
-  
+  const isTabletOrMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <Layout corFundo="white">
-      <Flex flexDirection="column">
-        <Flex flexDirection={isLargeThan700 && 'column-reverse'}>
-          <Box
-            my={isLargeThan700 ? '10' : '90'}
-            px="20"
-            alignItems="center"
-            justifyContent="center"
+      <Flex flexDirection={isTabletOrMobile ? 'column-reverse' : 'row'}>
+        <Box
+          my={isTabletOrMobile ? '-20' : '90'}
+          px={isTabletOrMobile ? '10' : '20'}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Heading mb="10" mt="90" pt="0">
+            Conheça a nossa fábrica
+          </Heading>
+          <Text mb="5">
+            Sabemos a importância de mostrar “in loco” as particularidades dos
+            processos da nossa fabricação, além do grande interesse e
+            curiosidade de nossos clientes e parceiros em conhecer mais sobre o
+            nosso processo produtivo e o seu caráter humano.{' '}
+          </Text>
+          <Text mb="5">
+            Assim, a Bertolucci é a única fábrica de luminárias do Brasil que
+            abre as suas portas e mostra o “como se faz”, tendo como objetivo
+            reforçar a singularidade da produção artesanal e a sensibilização da
+            mão-de-obra por trás dos nossos produtos.{' '}
+          </Text>
+          <Text mb="5">
+            Cada luminária é única, pois é produzida com amor e inspiração do
+            artesão.{' '}
+          </Text>
+          <Button
+            bgColor="blackAlpha.700"
+            color="whiteAlpha.900"
+            _hover={{ bgColor: 'blackAlpha.900', color: 'whiteAlpha.900' }}
           >
-            <Heading
-              mb="10"
-              mt={isLargeThan700 && '-20'}
-              pt={isLargeThan700 ? 0 : '10'}
+            <a
+              referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
+              target="_blank"
+              href="https://wa.me/5511945219938?text=Gostei%20dos%20produtos%2C%20podemos%20conversar%20%3F"
             >
-              Conheça a nossa fábrica
-            </Heading>
-            <Text mb="5">
-              Sabemos a importância de mostrar “in loco” as particularidades dos
-              processos da nossa fabricação, além do grande interesse e
-              curiosidade de nossos clientes e parceiros em conhecer mais sobre
-              o nosso processo produtivo e o seu caráter humano.{' '}
-            </Text>
-            <Text mb="5">
-              Assim, a Bertolucci é a única fábrica de luminárias do Brasil que
-              abre as suas portas e mostra o “como se faz”, tendo como objetivo
-              reforçar a singularidade da produção artesanal e a sensibilização
-              da mão-de-obra por trás dos nossos produtos.{' '}
-            </Text>
-            <Text mb="5">
-              Cada luminária é única, pois é produzida com amor e inspiração do
-              artesão.{' '}
-            </Text>
-            <Button
-              bgColor="blackAlpha.700"
-              color="whiteAlpha.900"
-              _hover={{ bgColor: 'blackAlpha.900', color: 'whiteAlpha.900' }}
-            >
-              <a
-                referrerPolicy="no-referrer no-referrer-when-downgrade strict-origin strict-origin-when-cross-origin"
-                target="_blank"
-                href="https://wa.me/5511945219938?text=Gostei%20dos%20produtos%2C%20podemos%20conversar%20%3F"
-              >
-                Agende sua visita
-              </a>
-            </Button>
-          </Box>
-          <Box w={isLargeThan700 ? '100%' : '50%'}>
-            <Banner isSlider dots arrows>
-              {sliderNossaHistoria.map((items, index) => {
-                return (
-                  <Box
-                    key={index}
-                    h="600px"
-                    position="relative"
-                    backgroundPosition="center"
-                    backgroundRepeat="no-repeat"
-                    backgroundSize="cover"
-                    bgImage={`url(${items.photoNossaHistoriaSlider.url})`}
-                    w="full"
-                  ></Box>
-                );
-              })}
-            </Banner>
-          </Box>
-        </Flex>
+              Agende sua visita
+            </a>
+          </Button>
+        </Box>
+
+        <Box w={isTabletOrMobile ? '100%' : '50%'}>
+          <Banner isSlider dots arrows>
+            {sliderNossaHistoria.map((items, index) => {
+              return (
+                <Box
+                  key={index}
+                  h="600px"
+                  position="relative"
+                  backgroundPosition="center"
+                  backgroundRepeat="no-repeat"
+                  backgroundSize="cover"
+                  bgImage={`url(${items.photoNossaHistoriaSlider.url})`}
+                  w="full"
+                ></Box>
+              );
+            })}
+          </Banner>
+        </Box>
       </Flex>
 
       <Divider
@@ -105,37 +88,35 @@ export default function Contato({ sliderNossaHistoria }) {
         variant="solid"
       />
 
-      <Flex flexDirection="column">
-        <Flex flexDirection={isLargeThan700 && 'column-reverse'}>
-          <Box
-            my={isLargeThan700 ? '10' : '90'}
-            px="20"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Heading mb="10" mt={isLargeThan700 && '-20'} pt="0">
-              Conheça a nossa fábrica
-            </Heading>
-            <Text mb="5">
-              Você quer mais informações? Caso não tenha encontrado as
-              informações necessárias, não hesite em nos contactar preenchendo o
-              formulário ao lado.
-            </Text>
-            <Text mb="5">
-              Assim, a Bertolucci é a única fábrica de luminárias do Brasil que
-              abre as suas portas e mostra o “como se faz”, tendo como objetivo
-              reforçar a singularidade da produção artesanal e a sensibilização
-              da mão-de-obra por trás dos nossos produtos.
-            </Text>
-            <Text mb="5">
-              Cada luminária é única, pois é produzida com amor e inspiração do
-              artesão.
-            </Text>
-          </Box>
-          <Box w={isLargeThan700 ? '100%' : '90%'} p="50">
-            <Form2 />
-          </Box>
-        </Flex>
+      <Flex flexDir={isTabletOrMobile ? 'column' : 'row'}>
+        <Box
+          my={isTabletOrMobile ? '40' : '90'}
+          px="20"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Heading mb="10" pt="0">
+            Conheça a nossa fábrica
+          </Heading>
+          <Text mb="5">
+            Você quer mais informações? Caso não tenha encontrado as informações
+            necessárias, não hesite em nos contactar preenchendo o formulário ao
+            lado.
+          </Text>
+          <Text mb="5">
+            Assim, a Bertolucci é a única fábrica de luminárias do Brasil que
+            abre as suas portas e mostra o “como se faz”, tendo como objetivo
+            reforçar a singularidade da produção artesanal e a sensibilização da
+            mão-de-obra por trás dos nossos produtos.
+          </Text>
+          <Text mb="5">
+            Cada luminária é única, pois é produzida com amor e inspiração do
+            artesão.
+          </Text>
+        </Box>
+        <Box w="90%" p="50">
+          <Form2 />
+        </Box>
       </Flex>
       <Flex flexDir="column" alignItems="center" justifyContent="center" p="30">
         <Heading fontSize="3xl" textAlign="center" p="10">
@@ -146,9 +127,9 @@ export default function Contato({ sliderNossaHistoria }) {
           width="100%"
           height="600"
           style={{ border: 0 }}
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </Flex>
       <Footer />
