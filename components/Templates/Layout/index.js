@@ -8,6 +8,7 @@ const Layout = ({ children, corFundo }) => {
 
   return (
     <Box bg={corFundo ? corFundo : bgColor} minH="100vh">
+      <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
       <Topbar />
       <Flex flexDirection="column" pt={16}>
         {children}
