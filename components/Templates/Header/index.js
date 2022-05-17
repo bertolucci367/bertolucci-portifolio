@@ -12,7 +12,7 @@ import {
   MenuItem,
   IconButton,
 } from '@chakra-ui/react';
-import { useMediaQuery } from 'src/components/useMediaQuery';
+import  useMediaQuery  from 'src/components/useMediaQuery';
 import Link from 'next/link';
 import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons';
 

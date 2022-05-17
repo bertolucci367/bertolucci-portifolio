@@ -2,7 +2,7 @@
 
 import { Box } from '@chakra-ui/react';
 
-import { useMediaQuery } from 'src/components/useMediaQuery';
+import  useMediaQuery from 'src/components/useMediaQuery';
 
 import Banner from 'src/components/AllBannersSliders/Structural/Banner';
 

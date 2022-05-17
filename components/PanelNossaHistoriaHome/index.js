@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Box, Text, Heading } from '@chakra-ui/react';
-import { useMediaQuery } from '../useMediaQuery';
+import  useMediaQuery  from '../useMediaQuery';
 
 export const PanelNossaHistoriaHome = () => {
   const isLargeThan700 = useMediaQuery('(max-width:700px)');

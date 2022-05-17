@@ -2,7 +2,7 @@
 //External libs
 import { Box, Text, Flex, Heading, Button, Divider } from '@chakra-ui/react';
 //Chakra UI
-import { useMediaQuery } from 'src/components/useMediaQuery';
+import useMediaQuery from 'src/components/useMediaQuery';
 //Components
 import Layout from 'src/components/Templates/Layout';
 

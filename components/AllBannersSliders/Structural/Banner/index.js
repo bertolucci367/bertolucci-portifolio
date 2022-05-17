@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
 
-import { useMediaQuery } from 'src/components/useMediaQuery';
+import  useMediaQuery  from 'src/components/useMediaQuery';
 
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
