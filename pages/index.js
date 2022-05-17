@@ -48,8 +48,8 @@ export default function Home({
   sliderNossaHistoria,
   instaFeed,
 }) {
-  const [isLargeThan700] = useMediaQuery('(max-width:700px)');
- 
+  const isLargeThan700 = useMediaQuery('(max-width:700px)');
+
   return (
     <Layout>
       <BannerSliderHome sliders={slidersHome} dots isSlider arrows />
@@ -133,7 +133,9 @@ export default function Home({
             </Flex>
 
             <Flex p="20px" alignItems="center" justifyContent="center">
-              <Heading textTransform="capitalize" fontSize="3xl">{items.name}</Heading>
+              <Heading textTransform="capitalize" fontSize="3xl">
+                {items.name}
+              </Heading>
             </Flex>
 
             <Flex px="32px" alignItems="center" justifyContent="center">

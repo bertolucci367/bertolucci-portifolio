@@ -10,9 +10,9 @@ import {
   Button,
   MenuList,
   MenuItem,
-  useMediaQuery,
   IconButton,
 } from '@chakra-ui/react';
+import { useMediaQuery } from 'src/components/useMediaQuery';
 import Link from 'next/link';
 import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -23,7 +23,7 @@ import useAuth from 'src/hooks/useAuth';
 const Topbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const [isLargeThan768] = useMediaQuery('(max-width:768px)');
+  const isLargeThan768 = useMediaQuery('(max-width:768px)');
 
   const bgColor = useColorModeValue('#ffff', '#1A202C');
 
@@ -61,14 +61,7 @@ const Topbar = () => {
       title: 'A fábrica',
       url: '/fabrica',
     },
-    {
-      title: 'Persona',
-      url: '/persona',
-    },
-    {
-      title: 'Giornale',
-      url: '/giornale',
-    },
+
     {
       title: 'Contato',
       url: '/contato',
@@ -186,23 +179,63 @@ const Topbar = () => {
               </Menu>
             </Flex>
           ) : (
-            <Flex alignItems="center" onClick={() => signinGoogle()} pr="10px">
-              <Button colorScheme="red">
-                <Box pr="10px">
-                  <AiOutlineGooglePlus title="Login with Google" size={20} />
-                </Box>
+            <Flex justifyContent="space-between">
+              <Flex
+                alignItems="center"
+                onClick={() => signinGoogle()}
+                pr="10px"
+              >
+                <Button colorScheme="red">
+                  <Box pr="10px">
+                    <AiOutlineGooglePlus title="Login with Google" size={20} />
+                  </Box>
 
-                <span
-                  onMouseEnter={(e) => {
-                    e.target.style.textDecoration = 'underline';
+                  <span
+                    onMouseEnter={(e) => {
+                      e.target.style.textDecoration = 'underline';
 
-                    e.target.style.cursor = 'pointer';
-                  }}
-                  onMouseLeave={(e) => (e.target.style.textDecoration = 'none')}
-                >
-                  Login
-                </span>
-              </Button>
+                      e.target.style.cursor = 'pointer';
+                    }}
+                    onMouseLeave={(e) =>
+                      (e.target.style.textDecoration = 'none')
+                    }
+                  >
+                    Login
+                  </span>
+                </Button>
+              </Flex>
+              <Flex alignItems="center" pr="10px">
+                <Link href="/login">
+                  <span
+                    onMouseEnter={(e) => {
+                      e.target.style.textDecoration = 'underline';
+
+                      e.target.style.cursor = 'pointer';
+                    }}
+                    onMouseLeave={(e) =>
+                      (e.target.style.textDecoration = 'none')
+                    }
+                  >
+                    login
+                  </span>
+                </Link>
+              </Flex>
+              <Flex alignItems="center" pr="10px">
+                <Link href="/cadastrar">
+                  <span
+                    onMouseEnter={(e) => {
+                      e.target.style.textDecoration = 'underline';
+
+                      e.target.style.cursor = 'pointer';
+                    }}
+                    onMouseLeave={(e) =>
+                      (e.target.style.textDecoration = 'none')
+                    }
+                  >
+                    cadastrar
+                  </span>
+                </Link>
+              </Flex>
             </Flex>
           )}
         </Flex>

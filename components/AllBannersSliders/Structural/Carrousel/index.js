@@ -16,9 +16,9 @@ export default function Carrousel({
 }) {
   const [slider, setSlider] = useState(null);
 
-  const top = useBreakpointValue({ base: '20%', md: '50%' });
+  const top = useBreakpointValue({ base: '42%', md: '50%' });
 
-  const side = useBreakpointValue({ base: '10%', md: '10%' });
+  const side = useBreakpointValue({ base: '5%', md: '10%' });
 
   const settings = {
     dots: false,

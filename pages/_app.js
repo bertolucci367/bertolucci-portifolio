@@ -22,6 +22,7 @@ const GlobalStyle = ({ children }) => (
           flex-direction: column;
           min-height: 100vh;
         }
+
        
       `}
     />

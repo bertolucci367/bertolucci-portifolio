@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ColorModeScript } from '@chakra-ui/react';
+import { css } from '@emotion/react';
 import theme from 'src/styles/theme';
 
 class MyDocument extends Document {
@@ -9,6 +10,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
             rel="stylesheet"
@@ -25,6 +27,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i"
             rel="stylesheet"
           />
+        
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.initialColorMode} />

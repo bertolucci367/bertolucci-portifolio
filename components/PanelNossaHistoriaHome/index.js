@@ -1,9 +1,12 @@
 /* eslint-disable */
 import { Box, Text, Heading } from '@chakra-ui/react';
+import { useMediaQuery } from '../useMediaQuery';
 
 export const PanelNossaHistoriaHome = () => {
+  const isLargeThan700 = useMediaQuery('(max-width:700px)');
+
   return (
-    <Box bg="white" p="20">
+    <Box bg="white" p={isLargeThan700 ? '0' : '20'}>
       <Heading pt="5" textAlign="center" fontSize="4xl">
         Nossa História
       </Heading>
