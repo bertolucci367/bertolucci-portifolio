@@ -12,7 +12,7 @@ import {
   MenuItem,
   IconButton,
 } from '@chakra-ui/react';
-import  useMediaQuery  from 'src/components/useMediaQuery';
+import useMediaQuery from 'src/components/useMediaQuery';
 import Link from 'next/link';
 import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -180,7 +180,7 @@ const Topbar = () => {
             </Flex>
           ) : (
             <Flex justifyContent="space-between">
-              <Flex
+              {/* <Flex
                 alignItems="center"
                 onClick={() => signinGoogle()}
                 pr="10px"
@@ -203,8 +203,8 @@ const Topbar = () => {
                     Login
                   </span>
                 </Button>
-              </Flex>
-              <Flex alignItems="center" pr="10px">
+              </Flex> */}
+              <Flex alignItems="center" pr="30px">
                 <Link href="/login">
                   <span
                     onMouseEnter={(e) => {
@@ -221,19 +221,21 @@ const Topbar = () => {
                 </Link>
               </Flex>
               <Flex alignItems="center" pr="10px">
-                <Link href="/cadastrar">
-                  <span
-                    onMouseEnter={(e) => {
-                      e.target.style.textDecoration = 'underline';
+                <Link href="/cadastro">
+                  <Button colorScheme="blue">
+                    <span
+                      onMouseEnter={(e) => {
+                        e.target.style.textDecoration = 'underline';
 
-                      e.target.style.cursor = 'pointer';
-                    }}
-                    onMouseLeave={(e) =>
-                      (e.target.style.textDecoration = 'none')
-                    }
-                  >
-                    cadastrar
-                  </span>
+                        e.target.style.cursor = 'pointer';
+                      }}
+                      onMouseLeave={(e) =>
+                        (e.target.style.textDecoration = 'none')
+                      }
+                    >
+                      cadastrar
+                    </span>
+                  </Button>
                 </Link>
               </Flex>
             </Flex>
