@@ -28,10 +28,33 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import Layout from 'src/components/Templates/Layout';
+import Footer from 'src/components/Templates/Footer';
 import { getProduct, getAllProducts } from 'src/lib/graphcms';
 import ItemProduto from 'src/components/ItemProduto';
 import React, { useEffect, useState } from 'react';
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from '@chakra-ui/icons'
+
+const BreakCrumb = ({ pid, name }) => {
+  return (
+    <Box flex="1" mt="85px">
+      <Flex>
+        <Box flex="1" p="15px">
+          <Link as="a" d="inline" href="/">
+            Bertolucci
+          </Link>
+          <Text d="inline"> | </Text>
+          <Link as="a" d="inline" href="/produtos">
+            Produtos
+          </Link>
+          <Text d="inline"> | </Text>
+          <Link as="a" d="inline" href={'/produtos/' + pid}>
+            {name}
+          </Link>
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
 
 const Produto = () => {
   const router = useRouter();
@@ -45,6 +68,11 @@ const Produto = () => {
 
   return (
     <Layout>
+      <style global jsx>{`
+        .css-133h7no {
+          background-color: #fff;
+        }
+    `}</style>
       <BreakCrumb pid={ pid } name={ product?.name }/>
         <Flex flex="1" mt="40px" w="100%">
           <Box w="40%" pl="20px" pr="40px" fontFamily="nunito">
@@ -112,7 +140,7 @@ const Produto = () => {
                 <Flex flex="1">
                   <Box w="100%" px="20px">
                     <Text fontSize="l" fontWeight="bold" pb="10px">Materiais</Text>
-                    <Text>{product?.materials}</Text>
+                    <Text textTransform="capitalize">{product?.materials.map(x => (x.name)).join(", ")}</Text>
                   </Box>
                 </Flex>
               </Box>
@@ -143,30 +171,83 @@ const Produto = () => {
             <Text>Diametro: {product?.diameter} cm</Text>
           </Box>
         </Flex>
+        <Flex borderTop="2px solid lightgray">
+          <Box p='4' w="100%">
+            <Flex>
+              <Box px='4' pt="6" w="100%">
+                <Flex>
+                  <Box>
+                    <Text fontSize="l" fontWeight="bold" pb="10px">Downloads</Text>
+                  </Box>
+                  <Spacer />
+                  <Box pr="40px">
+                    <Text fontSize="l" fontWeight="bold" pb="10px">Referência</Text>
+                  </Box>
+                </Flex>
+              </Box>
+            </Flex>
+            <Flex>
+              <Box px='4' pb="6" w="100%">
+                <Flex>
+                 <Box>
+                    {["","",""].map((item, key ) => (
+                      <Flex>
+                        <Box py="5px">
+                            <Link fontSize="l">Download {key} - {product?.name} <DownloadIcon mb="5px"/></Link>
+                        </Box>
+                      </Flex>
+                    ))}
+                  </Box>
+                  <Spacer />
+                  <Box pr='40px '>
+                    <Text>Referência</Text>
+                  </Box>
+                </Flex>
+              </Box>
+            </Flex>
+          </Box>
+        </Flex>
+        <Flex borderTop="2px solid lightgray" px="6" py="16">
+          <Box w="100%">
+            <Text fontSize="xl" fontWeight="bold" pb="8">Outras luminárias da mesma coleção</Text>
+            <SimpleGrid columns={6} spacing={10}>
+              {[1,2,3,4,5,6].map((item, key ) => (
+                <Box key={key}>
+                  <Flex w="100%" h="180" bg="lightgray">
+                    <Box></Box>
+                  </Flex>
+                  <Flex>
+                    <Center flex="1" p="2">
+                      <Text textAlign="Center" >Name</Text>
+                    </Center>
+                  </Flex>
+                </Box>
+              ))}
+            </SimpleGrid>
+          </Box>
+        </Flex>
+        <Flex borderTop="2px solid lightgray" px="6" py="16" mb="40">
+          <Box w="100%">
+            <Text fontSize="xl" fontWeight="bold" pb="8">Outras luminárias do mesmo tipo</Text>
+            <SimpleGrid columns={6} spacing={10}>
+              {[1,2,3,4,5,6].map((item, key ) => (
+                <Box key={key}>
+                  <Flex w="100%" h="180" bg="lightgray">
+                    <Box></Box>
+                  </Flex>
+                  <Flex>
+                    <Center flex="1" p="2">
+                      <Text textAlign="Center" >Name</Text>
+                    </Center>
+                  </Flex>
+                </Box>
+              ))}
+            </SimpleGrid>
+          </Box>
+        </Flex>
+        <Footer></Footer>
     </Layout>
   );
 };
 
 export default Produto;
-
-const BreakCrumb = ({ pid, name }) => {
-  return (
-    <Box flex="1" mt="85px">
-      <Flex>
-        <Box flex="1" p="15px">
-          <Link as="a" d="inline" href="/">
-            Bertolucci
-          </Link>
-          <Text d="inline"> | </Text>
-          <Link as="a" d="inline" href="/produtos">
-            Produtos
-          </Link>
-          <Text d="inline"> | </Text>
-          <Link as="a" d="inline" href={'/produtos/' + pid}>
-            {name}
-          </Link>
-        </Box>
-      </Flex>
-    </Box>
-  );
-};
