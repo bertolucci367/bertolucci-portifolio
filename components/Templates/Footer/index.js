@@ -18,9 +18,8 @@ import {
   Input,
   IconButton,
   useColorModeValue,
-  useMediaQuery,
 } from '@chakra-ui/react';
-
+import useMediaQuery from 'src/components/useMediaQuery';
 // Icones
 import { FaInstagram, FaWhatsapp, FaPinterest, FaVimeoV } from 'react-icons/fa';
 
