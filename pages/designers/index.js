@@ -1,6 +1,15 @@
 /* eslint-disable */
 
-import { Box, Text, Flex, Heading, Center, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Flex,
+  Heading,
+  Center,
+  Image,
+  Link,
+  SimpleGrid,
+} from '@chakra-ui/react';
 
 import Layout from 'src/components/Templates/Layout';
 
@@ -8,29 +17,34 @@ import { getAllDesigners } from 'src/lib/graphcms';
 
 import React, { useState } from 'react';
 
+import useMediaQuery from 'src/components/useMediaQuery';
+
 import Footer from 'src/components/Templates/Footer';
 
 // ==============================================
 
 function Items({ currentItems }) {
+  const isMobileScreen = useMediaQuery('(max-width:767px)');
   return (
     <>
       {currentItems &&
         currentItems.map((item, key) => (
-          <Box flex="30%" m="10px" key={key}>
-            <Center flex="1">
-              <Image
-                src={item.photo.map((item) => item.url)}
-                w="30vw"
-                h="55vh"
-                objectFit="contain"
-              />
-            </Center>
-            <Center flex="1" mt="10px">
-              <Text fontSize="20px" textTransform="capitalize">
-                {item.name.replace(new RegExp(/\..*/g), '')}
-              </Text>
-            </Center>
+          <Box key={key}>
+            <Link as="a" href={`/designers/${item.id}`}>
+              <Center flex="1">
+                <Image
+                  src={item.photo.map((item) => item.url)}
+                  w={isMobileScreen ? 'full' : '30vw'}
+                  h={isMobileScreen ? '40vh' : '55vh'}
+                  objectFit="contain"
+                />
+              </Center>
+              <Center flex="1" mt="10px">
+                <Text fontSize="20px" textTransform="capitalize">
+                  {item.name.replace(new RegExp(/\..*/g), '')}
+                </Text>
+              </Center>
+            </Link>
           </Box>
         ))}
     </>
@@ -58,7 +72,15 @@ export default function Designers({ designers }) {
         <Flex>
           <Box flex="1">
             <Flex direction="row" wrap="wrap" w="100%">
-              <Items currentItems={currentItems} />
+              <SimpleGrid
+                templateColumns={{
+                  sm: '1fr',
+                  md: 'repeat(2,1fr)',
+                  lg: 'repeat(3,1fr)',
+                }}
+              >
+                <Items currentItems={currentItems} />
+              </SimpleGrid>
               <style global jsx>{`
                 ul.paginate li {
                   display: inline;

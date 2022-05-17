@@ -65,7 +65,7 @@ const ListHeader = ({ children }) => {
 };
 
 export default function Footer() {
-  const isLargerThan600 = useMediaQuery('(max-width:600px)');
+  const isLargerThan600 = useMediaQuery('(max-width:768px)');
 
   return (
     <Box
@@ -90,7 +90,7 @@ export default function Footer() {
             <Stack direction="row">
               <Input
                 w="full"
-                placeholder="| *E-mail"
+                placeholder=" *E-mail"
                 bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
                 border={0}
                 _focus={{
