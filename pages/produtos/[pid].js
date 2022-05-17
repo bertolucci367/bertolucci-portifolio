@@ -139,6 +139,8 @@ const Produto = () => {
           <Box w="30%" px="20px">
             <Text fontSize="l" fontWeight="bold" pb="10px" position="relative" top="0px">Dimensão</Text>
             <Image src={product?.photo[1].url} maxHeight="600px" m="0 auto"/>
+            <Text>Altura: {product?.height} cm</Text>
+            <Text>Diametro: {product?.diameter} cm</Text>
           </Box>
         </Flex>
     </Layout>
