@@ -86,6 +86,7 @@ const Produto = () => {
   const [ product, setProduct ] = useState(null)
   const [ productsRelated, setProductsRelated ] = useState(carrouselPlaceholder)
   const [ productsRelatedTypology, setProductsRelatedTypology ] = useState(carrouselPlaceholder)
+  const [ cover, setCover ] = useState("")
   const pid = query.pid;
 
   if(!pid){  return ""; }
@@ -93,6 +94,7 @@ const Produto = () => {
   if(!product) { 
     getProduct(pid).then(x => {
       setProduct(x);
+      setCover(x.photo[0].url);
       getRelatedProducsSameLineFromCms(x.lines[0]?.id,x.id).then( related => {
         setProductsRelated(related);
       })
@@ -100,6 +102,29 @@ const Produto = () => {
         setProductsRelatedTypology(related);
       })
     })
+  }
+
+  const setCoverFoto = (event) => {
+    if(event.target.tagName !== "IMG")return;
+    setCover(event.target.src)
+  }
+
+
+  const handleScroll = (event) => {
+    let scrollBox = document.querySelector("#scrollBox");
+    let increase = scrollBox.scrollHeight / 10;
+    let id = event.target.id
+    
+    if(event.target.tagName !== "BUTTON")
+      id = event.target.parentElement.id;
+
+    if(id === 'scrollUp'){ 
+      scrollBox.scrollTop -= scrollBox.offsetHeight
+    }
+
+    if(id === 'scrollDown'){
+      scrollBox.scrollTop += scrollBox.offsetHeight
+    }
   }
 
   return (
@@ -125,29 +150,60 @@ const Produto = () => {
               <Flex w="100%">  
                 <Box w="100%">
                   <Flex w="100%" px="10px">
-                    <Center bg="lightgray" w="78%" pr="20px" ml="20px">
-                      <Image src={product?.photo[1].url} maxHeight="600px" m="0 auto"/>
+                    <Center bg="lightgray" w="78%" ml="20px" h="600px">
+                      <Image src={cover} maxHeight="600px" minWidth="full" objectFit="contain" m="0 auto"/>
                     </Center>
                     <Box w="20%" ml="20px" pr="30px">
-                      <IconButton icon={<ChevronUpIcon />} w="100%" mb="10px" fontSize="30px" 
+                      <IconButton id="scrollUp" onClick={handleScroll} icon={<ChevronUpIcon />} w="100%" mb="10px" fontSize="30px" 
                       position="relative" bg="lightgray" float="top"></IconButton>                                        
-                      <Box overflow="hidden" maxHeight="500px" mt="">
+                      <Box id="scrollBox" overflow="hidden" h="500px" mt="">
                         {product?.photo.map((x,y)=>(
-                          <Flex pb="10px" key={y}>
+                          <Link onClick={setCoverFoto} key={y}>
+                          <Flex pb="10px">
                             <Center bg="lightgray" border="4px solid lightgray">
                               <Image src={x.url} w="100%" m="0 auto"/>
                             </Center>
                           </Flex>    
+                          </Link>
                         ))}
                         {product?.photo.map((x,y)=>(
-                          <Flex pb="10px" key={y}>
+                          <Link onClick={setCoverFoto} key={y}>
+                          <Flex pb="10px">
                             <Center bg="lightgray" border="4px solid lightgray">
                               <Image src={x.url} w="100%" m="0 auto"/>
                             </Center>
                           </Flex>    
+                          </Link>
+                        ))}
+                        {product?.photo.map((x,y)=>(
+                          <Link onClick={setCoverFoto} key={y}>
+                          <Flex pb="10px">
+                            <Center bg="lightgray" border="4px solid lightgray">
+                              <Image src={x.url} w="100%" m="0 auto"/>
+                            </Center>
+                          </Flex>    
+                          </Link>
+                        ))}
+                        {product?.photo.map((x,y)=>(
+                          <Link onClick={setCoverFoto} key={y}>
+                          <Flex pb="10px">
+                            <Center bg="lightgray" border="4px solid lightgray">
+                              <Image src={x.url} w="100%" m="0 auto"/>
+                            </Center>
+                          </Flex>    
+                          </Link>
+                        ))}
+                        {product?.photo.map((x,y)=>(
+                          <Link onClick={setCoverFoto} key={y}>
+                          <Flex pb="10px">
+                            <Center bg="lightgray" border="4px solid lightgray">
+                              <Image src={x.url} w="100%" m="0 auto"/>
+                            </Center>
+                          </Flex>    
+                          </Link>
                         ))}
                       </Box>
-                      <IconButton icon={<ChevronDownIcon />} w="100%" mb="10px" 
+                      <IconButton id="scrollDown" onClick={handleScroll} icon={<ChevronDownIcon />} w="100%" mb="10px" 
                       fontSize="30px" position="relative" bottom="-10px" bg="lightgray" 
                       float="bottom"></IconButton>
                     </Box>
