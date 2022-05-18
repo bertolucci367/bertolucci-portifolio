@@ -327,7 +327,7 @@ const Produto = () => {
                             </Box>
                           );
                         })}
-                    </Carousel>;
+                    </Carousel>
                 </Box>
               </Flex>
             </Box>
@@ -360,7 +360,7 @@ const Produto = () => {
                             </Box>
                           );
                         })}
-                    </Carousel>;
+                    </Carousel>
                 </Box>
               </Flex>
             </Box>
