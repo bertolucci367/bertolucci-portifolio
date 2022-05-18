@@ -29,7 +29,7 @@ import {
 import { useRouter } from 'next/router';
 import Layout from 'src/components/Templates/Layout';
 import Footer from 'src/components/Templates/Footer';
-import { getProduct, getAllProducts } from 'src/lib/graphcms';
+import { getProduct, getAllProducts, getRelatedProducsFromCms } from 'src/lib/graphcms';
 import ItemProduto from 'src/components/ItemProduto';
 import React, { useEffect, useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from '@chakra-ui/icons'
@@ -60,11 +60,20 @@ const Produto = () => {
   const router = useRouter();
   const query = router.query;
   const [ product, setProduct ] = useState(null)
+  const [ productsRelated, setProductsRelated ] = useState(null)
   const pid = query.pid;
 
   if(!pid){  return ""; }
 
-  if(!product) { getProduct(pid).then(x => {setProduct(x)})}
+  if(!product) { 
+    getProduct(pid).then(x => {
+      setProduct(x);
+      getRelatedProducsFromCms(x.lines[0]?.id,x.id).then( related => {
+        setProductsRelated(related);
+        console.log(related)
+      })
+    })
+  }
 
   return (
     <Layout>
@@ -125,7 +134,7 @@ const Produto = () => {
             <Text fontSize="4xl" textTransform="uppercase" letterSpacing="-2px">Ficha Técnica</Text>
           </Box>
         </Flex>
-        <Flex flex="1" mt="40px" w="100%">
+        <Flex flex="1" mt="40px" w="100%" pb="16">
           <Box w="100%" pb="20px">
             <Flex flex="1" mt="15px" pl="20px" w="100%">
               <Box w="100%" pb="20px">
@@ -190,10 +199,10 @@ const Produto = () => {
               <Box px='4' pb="6" w="100%">
                 <Flex>
                  <Box>
-                    {["","",""].map((item, key ) => (
-                      <Flex>
+                    {product?.files.map((item, key ) => (
+                      <Flex key={key}>
                         <Box py="5px">
-                            <Link fontSize="l">Download {key} - {product?.name} <DownloadIcon mb="5px"/></Link>
+                            <Link fontSize="l" id={item?.id}>Download {key} - {item?.name} <DownloadIcon mb="5px"/></Link>
                         </Box>
                       </Flex>
                     ))}
@@ -211,16 +220,18 @@ const Produto = () => {
           <Box w="100%">
             <Text fontSize="xl" fontWeight="bold" pb="8">Outras luminárias da mesma coleção</Text>
             <SimpleGrid columns={6} spacing={10}>
-              {[1,2,3,4,5,6].map((item, key ) => (
+              {productsRelated?.map((item, key ) => (
                 <Box key={key}>
+                  <Link href={`/produtos/${item.id}`}>
                   <Flex w="100%" h="180" bg="lightgray">
-                    <Box></Box>
+                    <Image src={ item && !item.cover[0] ? item.photo[0].url : item.cover[0].url}/>
                   </Flex>
                   <Flex>
                     <Center flex="1" p="2">
-                      <Text textAlign="Center" >Name</Text>
+                      <Text textAlign="Center">{item.name}</Text>
                     </Center>
                   </Flex>
+                  </Link>
                 </Box>
               ))}
             </SimpleGrid>
@@ -229,6 +240,7 @@ const Produto = () => {
         <Flex borderTop="2px solid lightgray" px="6" py="16" mb="40">
           <Box w="100%">
             <Text fontSize="xl" fontWeight="bold" pb="8">Outras luminárias do mesmo tipo</Text>
+              
             <SimpleGrid columns={6} spacing={10}>
               {[1,2,3,4,5,6].map((item, key ) => (
                 <Box key={key}>
@@ -237,7 +249,7 @@ const Produto = () => {
                   </Flex>
                   <Flex>
                     <Center flex="1" p="2">
-                      <Text textAlign="Center" >Name</Text>
+                      <Text textAlign="Center">Name</Text>
                     </Center>
                   </Flex>
                 </Box>
@@ -245,7 +257,7 @@ const Produto = () => {
             </SimpleGrid>
           </Box>
         </Flex>
-        <Footer></Footer>
+        <Footer/>
     </Layout>
   );
 };
